@@ -4,8 +4,21 @@ This is the activities and instructions to start.
 
 ### Activity 2.1 Workspace & Package
 * Clone the repository http://github.com/twming/ros2_training_tutorial.
-* move "my_node" folder to ~/dev_ws/src
-* Inspect the CMakeList
+* Move "my_node" folder to ~/dev_ws/src
+* Inspect the CMakeList.txt and package.xml files, check the package name and project name is “my_node”
+
+### Activity 2.2 Colcon build
+* Run colcon build on “my_node"
+* Debug the build, if any error
+  
+### Activity 2.3 Topic Publisher
+* Create “publisher.py” in “scripts”
+* Define “MinimalPublisher” class and String “topic“
+* Update new line in CMakeList.txt 
+       “scripts/publisher.py” 
+* Colcon build, source setup.bash and run.
+* Use ros2 topic echo /topic to check the message.
+
 
 Create publisher.py
 ```
