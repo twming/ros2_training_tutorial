@@ -61,7 +61,8 @@ This is the activities and instructions to start.
 > “scripts/publisher.py” 
 * Colcon build, source setup.bash and run.
 * Use ros2 topic echo /topic to check the message.
-> [!TIP] publisher.py
+> [!TIP]
+> publisher.py
 ```
 #!/usr/bin/env python3
 import rclpy
@@ -101,7 +102,8 @@ if __name__ == '__main__':
 > “scripts/subscriber.py” 
 * Colcon build and source setup.bash.
 * Run and test the output together with publisher.py
-> [!TIP] subscriber.py
+> [!TIP]
+> subscriber.py
 ```
 #!/usr/bin/env python3
 import rclpy
@@ -139,7 +141,8 @@ if __name__ == '__main__':
 > “scripts/turtle_move.py” 
 * Colcon build, source setup.bash.
 * Run and observe movement in turtlesim
-> [!TIP] Node and Topic Information
+> [!TIP]
+> Node and Topic Information
 ```
 node name: “turtle_move”
 topic name: “/turtle1/cmd_vel”
@@ -177,7 +180,8 @@ int32 y
 ### Activity 2.9: report_coordinate.py with TargetCoordinates
 * Duplicate “publisher.py” to “report_coordinate.py”
 * Modify the topic type to TargetCoordinates, rename to “coordinate”, publish below data:
-> [!NOTE] Message Information
+> [!NOTE]
+> Message Information
 ```
 id: Peter
 x: 45
@@ -189,7 +193,8 @@ y: 60
 ros2 topic echo /coordinate
 ```
 
-> [!TIP] report_coordinate.py
+> [!TIP]
+> report_coordinate.py
 ```
 #!/usr/bin/env python3
 import rclpy
@@ -226,7 +231,8 @@ if __name__ == '__main__':
 ### Activity 2.10: Create AddTwoInts.srv
 * In the “my_interface” package, create “srv” folder.
 * Create AddTwoInts.srv, with request and response.
-> [!NOTE] Service Information
+> [!NOTE]
+> Service Information
 ```
 int32 x
 int32 y
@@ -246,7 +252,8 @@ int32 sum
 ros2 run my_node add_two_int_server.py
 ros2 run my_node add_two_int_client.py 54 32
 ```
-> [!TIP] add_two_int_server.py
+> [!TIP]
+> add_two_int_server.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -273,7 +280,8 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-> [!TIP] add_two_int_client.py
+> [!TIP]
+> add_two_int_client.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -314,7 +322,8 @@ if __name__ == '__main__':
 * In the “my_interface” package, create “action” folder.
 * Create Fibonacci.action, with goal, result and feedback.
 
-> [!NOTE] Action Information
+> [!NOTE]
+> Action Information
 ```
 int32 order
 ---
@@ -335,7 +344,8 @@ int32[] partial_sequence
 ros2 run my_node fibonacci_server.py
 ros2 run my_node fibonacci_client.py 12
 ```
-> [!TIP] fibonacci_server.py
+> [!TIP]
+> fibonacci_server.py
 ```
 #!/usr/bin/env python3
 import time
@@ -378,7 +388,8 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-> [!TIP] fibonacci_client.py
+> [!TIP]
+> fibonacci_client.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -431,7 +442,8 @@ if __name__ == '__main__':
 ### Optional: Launch File
 * Create a launch file named "turtlesim_circle_launch.py" in launch folder
 * Launch the turtlesim_node and turtle_move.py
-> [!TIP] turtlesim_circle_launch.py
+> [!TIP]
+> turtlesim_circle_launch.py
 ```
 #!/usr/bin/env python3
 from launch import LaunchDescription
@@ -455,6 +467,7 @@ def generate_launch_description():
 # Reference
 ### Unix/Linux Commands
 > [!TIP]
+> Commonly use commands
 ```
 ls              # list the items in the directory
 cd my_folder    # change directory to my_folder
