@@ -15,7 +15,7 @@ This is the activities and instructions to start.
 * Create “publisher.py” in “scripts”
 * Define “MinimalPublisher” class and String “topic“
 * Update new line in CMakeList.txt 
-       “scripts/publisher.py” 
+>“scripts/publisher.py” 
 * Colcon build, source setup.bash and run.
 * Use ros2 topic echo /topic to check the message.
 
