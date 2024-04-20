@@ -1,5 +1,11 @@
 # ros2_training_tutorial
 
+Package requirements:
+```
+sudo apt install ros-iron-joint-state-publisher
+sudo apt-get install python3-tk
+```
+
 Create publisher.py
 ```
 #!/usr/bin/env python3
