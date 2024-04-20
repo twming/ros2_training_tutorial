@@ -1,10 +1,11 @@
-# ros2_training_tutorial
+# ROS2 Training Tutorials v1.0
 
-Package requirements:
-```
-sudo apt install ros-iron-joint-state-publisher
-sudo apt-get install python3-tk
-```
+This is the activities and instructions to start.
+
+### Activity 2.1 Workspace & Package
+* Clone the repository http://github.com/twming/ros2_training_tutorial.
+* move "my_node" folder to ~/dev_ws/src
+* Inspect the CMakeList
 
 Create publisher.py
 ```
@@ -120,13 +121,13 @@ add_two_int_server.py
 import sys
 import rclpy
 from rclpy.node import Node
-from my_interface.srv import AddTwoInts
+from my_interface.srv import AddTwoInt
 
 class MinimalService(Node):
 
     def __init__(self):
         super().__init__('minimal_service')
-        self.srv = self.create_service(AddTwoInts, 'add_two_ints', self.add_two_ints_callback)
+        self.srv = self.create_service(AddTwoInt, 'add_two_ints', self.add_two_ints_callback)
 
     def add_two_ints_callback(self, request, response):
         response.sum = request.x + request.y
@@ -147,17 +148,17 @@ add_two_int_client.py
 ```
 #!/usr/bin/env python3
 import sys
-from my_interface.srv import AddTwoInts
+from my_interface.srv import AddTwoInt
 import rclpy
 from rclpy.node import Node
 
 class MinimalClientAsync(Node):
     def __init__(self):
         super().__init__('minimal_client_async')
-        self.cli = self.create_client(AddTwoInts, 'add_two_ints')
+        self.cli = self.create_client(AddTwoInt, 'add_two_ints')
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service not available, waiting again...')
-        self.req = AddTwoInts.Request()
+        self.req = AddTwoInt.Request()
 
     def send_request(self, a, b):
         self.req.x = a
@@ -192,7 +193,6 @@ from rclpy.node import Node
 from my_interface.action import Fibonacci
 
 class FibonacciActionServer(Node):
-
     def __init__(self):
         super().__init__('fibonacci_action_server')
         self._action_server = ActionServer(
@@ -203,7 +203,6 @@ class FibonacciActionServer(Node):
 
     def execute_callback(self, goal_handle):
         self.get_logger().info('Executing goal...')
-
         feedback_msg = Fibonacci.Feedback()
         feedback_msg.partial_sequence = [0, 1]
 
@@ -213,18 +212,16 @@ class FibonacciActionServer(Node):
             self.get_logger().info('Feedback: {0}'.format(feedback_msg.partial_sequence))
             goal_handle.publish_feedback(feedback_msg)
             time.sleep(1)
-        goal_handle.succeed()
 
+        goal_handle.succeed()
         result = Fibonacci.Result()
         result.sequence = feedback_msg.partial_sequence
         return result
-
 
 def main(args=None):
     rclpy.init(args=args)
     fibonacci_action_server = FibonacciActionServer()
     rclpy.spin(fibonacci_action_server)
-
 
 if __name__ == '__main__':
     main()
@@ -239,7 +236,6 @@ from rclpy.node import Node
 from my_interface.action import Fibonacci
 
 class FibonacciActionClient(Node):
-
     def __init__(self):
         super().__init__('fibonacci_action_client')
         self._action_client = ActionClient(self, Fibonacci, 'fibonacci')
@@ -247,14 +243,35 @@ class FibonacciActionClient(Node):
     def send_goal(self, order):
         goal_msg = Fibonacci.Goal()
         goal_msg.order = order
+
         self._action_client.wait_for_server()
-        return self._action_client.send_goal_async(goal_msg)
+        self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
+        self._send_goal_future.add_done_callback(self.goal_response_callback)
+
+    def goal_response_callback(self, future):
+        goal_handle = future.result()
+        if not goal_handle.accepted:
+            self.get_logger().info('Goal rejected :(')
+            return
+        self.get_logger().info('Goal accepted :)')
+        self._get_result_future = goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.get_result_callback)
+
+    def get_result_callback(self, future):
+        result = future.result().result
+        self.get_logger().info('Result: {0}'.format(result.sequence))
+        rclpy.shutdown()
+
+    def feedback_callback(self, feedback_msg):
+        feedback = feedback_msg.feedback
+        self.get_logger().info('Received feedback: {0}'.format(feedback.partial_sequence))
+
 
 def main(args=None):
     rclpy.init(args=args)
     action_client = FibonacciActionClient()
-    future = action_client.send_goal(int(sys.argv[1]))
-    rclpy.spin_until_future_complete(action_client, future)
+    action_client.send_goal(int(sys.argv[1]))
+    rclpy.spin(action_client)
 
 if __name__ == '__main__':
     main()
