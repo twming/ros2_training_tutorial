@@ -35,6 +35,12 @@ Install ROS Iron desktop
 ```
 sudo apt install ros-iron-desktop
 ```
+# Software/Packages Requirements
+These are the required software and packages.
+```
+sudo apt install ros-iron-joint-state-publisher
+sudo snap install --classic code
+```
 
 # ROS2 Training Tutorials v1.0
 This is the activities and instructions to start.
@@ -52,10 +58,11 @@ This is the activities and instructions to start.
 * Create “publisher.py” in “scripts”
 * Define “MinimalPublisher” class and String “topic“
 * Update new line in CMakeList.txt 
->“scripts/publisher.py” 
+> “scripts/publisher.py” 
 * Colcon build, source setup.bash and run.
 * Use ros2 topic echo /topic to check the message.
->publisher.py
+> [!TIP]
+> publisher.py
 ```
 #!/usr/bin/env python3
 import rclpy
@@ -92,10 +99,11 @@ if __name__ == '__main__':
 * Create “subscriber.py” in “scripts”
 * Define “MinimalSubscriber” class and String “topic“
 * Update CMakeList.txt 
->“scripts/subscriber.py” 
+> “scripts/subscriber.py” 
 * Colcon build and source setup.bash.
 * Run and test the output together with publisher.py
->subscriber.py
+> [!TIP]
+> subscriber.py
 ```
 #!/usr/bin/env python3
 import rclpy
@@ -130,34 +138,34 @@ if __name__ == '__main__':
 * Open “turtle_move.py” in “scripts”
 * Complete the code
 * Update CMakeList.txt 
->“scripts/turtle_move.py” 
+> “scripts/turtle_move.py” 
 * Colcon build, source setup.bash.
 * Run and observe movement in turtlesim
->node name: “turtle_move”
->topic name: “/turtle1/cmd_vel”
->linear.x : 0.5
->angular.z: 0.5
+> [!TIP]
+> node name: “turtle_move”
+> topic name: “/turtle1/cmd_vel”
+> linear.x : 0.5
+> angular.z: 0.5
 
 ### Activity 2.6: Create Launch File
 * Create a folder “launch” in “my_node”
 * Create “turtlesim_follow_launch.py”
 * Update CMakeList.txt 
->“scripts/turtlesim_follow_launch.py” 
+> “scripts/turtlesim_follow_launch.py” 
 * Colcon build, source setup.bash.
 * Run and observe movement in turtlesim
 
 ### Activity 2.7: Create Interface Package
 * Create “my_interface” package using ROS command:
->$ cd ~/dev_ws/src/
->$ ros2 pkg create my_interface --build_type ament_cmake
-
+> $ cd ~/dev_ws/src/
+> $ ros2 pkg create my_interface --build_type ament_cmake
 
 ### Activity 2.8 Create TargetCoordinates.msg
 * In the “my_interface” package, create “msg” folder.
 * Create TargetCoordinates.msg, with below data type:
->string id
->int32 x
->int32 y
+> string id
+> int32 x
+> int32 y
 * Update CMakeList.txt and package.xml
 * Build the “my_interface” package
 * Check the interface message using ros2 command.
@@ -165,14 +173,17 @@ if __name__ == '__main__':
 ### Activity 2.9: report_coordinate.py with TargetCoordinates
 * Duplicate “publisher.py” to “report_coordinate.py”
 * Modify the topic type to TargetCoordinates, rename to “coordinate”, publish below data:
+> [!NOTE]
 >	id: Peter
 >	x: 45
 >	y: 60
+
 * Run the report_coordinate.py 
 * Echo the /coordinate topic
 > $ ros2 topic echo /coordinate
 
->report_coordinate.py
+> [!TIP]
+> report_coordinate.py
 ```
 #!/usr/bin/env python3
 import rclpy
@@ -209,10 +220,11 @@ if __name__ == '__main__':
 ### Activity 2.10: Create AddTwoInts.srv
 * In the “my_interface” package, create “srv” folder.
 * Create AddTwoInts.srv, with request and response.
->int32 x
->int32 y
->- - -
->int32 sum
+> [!NOTE]
+> int32 x
+> int32 y
+> - - -
+> int32 sum
 * Update CMakeList.txt and package.xml
 * Build the “my_interface” package
 * Check the interface message using ros2 command.
@@ -225,7 +237,8 @@ if __name__ == '__main__':
 > $ros2 run my_node add_two_int_server.py
 > $ros2 run my_node add_two_int_client.py 54 32
 
->add_two_int_server.py
+> [!TIP]
+> add_two_int_server.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -252,8 +265,8 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-
->add_two_int_client.py
+> [!TIP]
+> add_two_int_client.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -292,12 +305,15 @@ if __name__ == '__main__':
 
 ### Activity 2.12: Create Fibonacci.action
 * In the “my_interface” package, create “action” folder.
-* Create Fibonacci.action, with goal, result and feedback.        
+* Create Fibonacci.action, with goal, result and feedback.
+
+> [!NOTE]    
 > int32 order
 > ---
 > int32[] sequence
 > ---
 > int32[] partial_sequence
+
 * Update CMakeList.txt and package.xml
 * Build the “my_interface” package
 * Check the interface message using ros2 command.
@@ -310,7 +326,8 @@ if __name__ == '__main__':
 > $ros2 run my_node fibonacci_server.py
 > $ros2 run my_node fibonacci_client.py 12
 
->fibonacci_server.py
+> [!TIP]
+> fibonacci_server.py
 ```
 #!/usr/bin/env python3
 import time
@@ -353,7 +370,8 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
->fibonacci_client.py
+> [!TIP]
+> fibonacci_client.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -406,7 +424,7 @@ if __name__ == '__main__':
 ### Optional: Launch File
 * Create a launch file named "turtlesim_circle_launch.py" in launch folder
 * Launch the turtlesim_node and turtle_move.py
-
+> [!TIP]
 > turtlesim_circle_launch.py
 ```
 #!/usr/bin/env python3
@@ -428,7 +446,39 @@ def generate_launch_description():
         ]
     )
 ```
-### Reference - Custom msg/srv/action
+# Reference
+### Unix/Linux Commands
+[!TIP]
+```
+ls              # list the items in the directory
+cd my_folder    # change directory to my_folder
+cd ..           # change directory to parent folder
+cd ~            # change directory to /home/ros folder
+mkdir my_folder # create new my_folder directory
+rmdir my_folder # remove my_folder directory
+rm file         # remove file
+sudo apt-get install package_name # install package_name
+```
+### ROS2 Commands
+| ROS2  | ROS |
+| ------------- | ------------- |
+| ros2 pkg list/executables | rospack list |
+| ros2 pkg create --build-type ament_cmake/ament_python --node-name node pkg --dependencies rclcpp std_msgs | catkin_create_pkg pkg rospy std_msgs |
+| ros2 node list/info  | rosnode list/info  |
+| ros2 topic list/info/echo/pub  | rostopic list/info/echo/pub  |
+| ros2 service list/type/call | rosservice list/type/call |
+| ros2 action list/info/send_goal | rosaction list/info/send_goal |
+| ros2 interface list/show | rosmsg list/show  |
+| ros2 param list/get/set | rosparam list/get/set |
+| ros2 run pkg node --ros-args -p param1:=value1 -p param2:=value2 | rosrun pkg node param1:=value1 | 
+| ros2 run pkg node --ros-args --params-file /file.yaml | rosparam load file.yaml | 
+| ros2 run pkg node --ros-args -r node_topic:=topic_to_map | rosrun pkg node node_topic:=topic_to_map| 
+| ros2 run rqt_graph rqt_graph | rosrun rqt_graph rqt_graph |
+| ros2 run rqt_console rqt_console | rosrun rqt_console rqt_console |
+| ros2 run rqt_tf_tree rqt_tf_tree | rosrun rqt_tf_tree rqt_tf_tree |
+| colcon build --packages-select pkg | catkin_make -DCATKIN_WHITELIST_PACKAGES="pkg" |
+
+### Custom msg/srv/action
 ```
 TargetCoordinates.msg
 string id
