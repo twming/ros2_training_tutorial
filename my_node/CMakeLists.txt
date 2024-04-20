@@ -33,9 +33,8 @@ ament_python_install_package(${PROJECT_NAME})
 
 #install py executables
 install(PROGRAMS
-  scripts/py_node.py
   # Add your script below
-
+  # scripts/turtle_move.py
 
 
   DESTINATION lib/${PROJECT_NAME}
