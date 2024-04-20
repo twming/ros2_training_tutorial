@@ -61,8 +61,7 @@ This is the activities and instructions to start.
 > “scripts/publisher.py” 
 * Colcon build, source setup.bash and run.
 * Use ros2 topic echo /topic to check the message.
-> [!TIP]
-> publisher.py
+> [!TIP] publisher.py
 ```
 #!/usr/bin/env python3
 import rclpy
@@ -102,8 +101,7 @@ if __name__ == '__main__':
 > “scripts/subscriber.py” 
 * Colcon build and source setup.bash.
 * Run and test the output together with publisher.py
-> [!TIP]
-> subscriber.py
+> [!TIP] subscriber.py
 ```
 #!/usr/bin/env python3
 import rclpy
@@ -141,11 +139,13 @@ if __name__ == '__main__':
 > “scripts/turtle_move.py” 
 * Colcon build, source setup.bash.
 * Run and observe movement in turtlesim
-> [!TIP]
-> node name: “turtle_move”
-> topic name: “/turtle1/cmd_vel”
-> linear.x : 0.5
-> angular.z: 0.5
+> [!TIP] Node and Topic Information
+```
+node name: “turtle_move”
+topic name: “/turtle1/cmd_vel”
+linear.x : 0.5
+angular.z: 0.5
+```
 
 ### Activity 2.6: Create Launch File
 * Create a folder “launch” in “my_node”
@@ -157,15 +157,19 @@ if __name__ == '__main__':
 
 ### Activity 2.7: Create Interface Package
 * Create “my_interface” package using ROS command:
-> $ cd ~/dev_ws/src/
-> $ ros2 pkg create my_interface --build_type ament_cmake
+```
+cd ~/dev_ws/src/
+ros2 pkg create my_interface --build_type ament_cmake
+```
 
 ### Activity 2.8 Create TargetCoordinates.msg
 * In the “my_interface” package, create “msg” folder.
 * Create TargetCoordinates.msg, with below data type:
-> string id
-> int32 x
-> int32 y
+```
+string id
+int32 x
+int32 y
+```
 * Update CMakeList.txt and package.xml
 * Build the “my_interface” package
 * Check the interface message using ros2 command.
@@ -173,17 +177,19 @@ if __name__ == '__main__':
 ### Activity 2.9: report_coordinate.py with TargetCoordinates
 * Duplicate “publisher.py” to “report_coordinate.py”
 * Modify the topic type to TargetCoordinates, rename to “coordinate”, publish below data:
-> [!NOTE]
->	id: Peter
->	x: 45
->	y: 60
-
+> [!NOTE] Message Information
+```
+id: Peter
+x: 45
+y: 60
+```
 * Run the report_coordinate.py 
 * Echo the /coordinate topic
-> $ ros2 topic echo /coordinate
+```
+ros2 topic echo /coordinate
+```
 
-> [!TIP]
-> report_coordinate.py
+> [!TIP] report_coordinate.py
 ```
 #!/usr/bin/env python3
 import rclpy
@@ -220,11 +226,13 @@ if __name__ == '__main__':
 ### Activity 2.10: Create AddTwoInts.srv
 * In the “my_interface” package, create “srv” folder.
 * Create AddTwoInts.srv, with request and response.
-> [!NOTE]
-> int32 x
-> int32 y
-> - - -
-> int32 sum
+> [!NOTE] Service Information
+```
+int32 x
+int32 y
+---
+int32 sum
+```
 * Update CMakeList.txt and package.xml
 * Build the “my_interface” package
 * Check the interface message using ros2 command.
@@ -234,11 +242,11 @@ if __name__ == '__main__':
 * Update CMakeList.txt and package.xml
 * Build the “my_node” package
 * Run each code in one terminal.
-> $ros2 run my_node add_two_int_server.py
-> $ros2 run my_node add_two_int_client.py 54 32
-
-> [!TIP]
-> add_two_int_server.py
+```
+ros2 run my_node add_two_int_server.py
+ros2 run my_node add_two_int_client.py 54 32
+```
+> [!TIP] add_two_int_server.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -265,8 +273,7 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-> [!TIP]
-> add_two_int_client.py
+> [!TIP] add_two_int_client.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -307,13 +314,14 @@ if __name__ == '__main__':
 * In the “my_interface” package, create “action” folder.
 * Create Fibonacci.action, with goal, result and feedback.
 
-> [!NOTE]    
-> int32 order
-> ---
-> int32[] sequence
-> ---
-> int32[] partial_sequence
-
+> [!NOTE] Action Information
+```
+int32 order
+---
+int32[] sequence
+---
+int32[] partial_sequence
+```
 * Update CMakeList.txt and package.xml
 * Build the “my_interface” package
 * Check the interface message using ros2 command.
@@ -323,11 +331,11 @@ if __name__ == '__main__':
 * Update CMakeList.txt and package.xml
 * Build the “my_node” package
 * Run each code in one terminal.
-> $ros2 run my_node fibonacci_server.py
-> $ros2 run my_node fibonacci_client.py 12
-
-> [!TIP]
-> fibonacci_server.py
+```
+ros2 run my_node fibonacci_server.py
+ros2 run my_node fibonacci_client.py 12
+```
+> [!TIP] fibonacci_server.py
 ```
 #!/usr/bin/env python3
 import time
@@ -370,8 +378,7 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-> [!TIP]
-> fibonacci_client.py
+> [!TIP] fibonacci_client.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -424,8 +431,7 @@ if __name__ == '__main__':
 ### Optional: Launch File
 * Create a launch file named "turtlesim_circle_launch.py" in launch folder
 * Launch the turtlesim_node and turtle_move.py
-> [!TIP]
-> turtlesim_circle_launch.py
+> [!TIP] turtlesim_circle_launch.py
 ```
 #!/usr/bin/env python3
 from launch import LaunchDescription
@@ -448,7 +454,7 @@ def generate_launch_description():
 ```
 # Reference
 ### Unix/Linux Commands
-[!TIP]
+> [!TIP]
 ```
 ls              # list the items in the directory
 cd my_folder    # change directory to my_folder
@@ -459,7 +465,7 @@ rmdir my_folder # remove my_folder directory
 rm file         # remove file
 sudo apt-get install package_name # install package_name
 ```
-### ROS2 Commands
+### ROS Commands
 | ROS2  | ROS |
 | ------------- | ------------- |
 | ros2 pkg list/executables | rospack list |
