@@ -1,37 +1,68 @@
-# ROS2 Training Tutorials v1.0
+# ROS2 Installation in Ubuntu 22.04
 
+This are the ROS installation steps. 
+### ROS2 Iron Installation in Ubuntu
+Enable UTF-8 locale support
+```
+locale  # check for UTF-8
+
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+locale  # verify settings
+```
+Enable Universe repository in Ubuntu
+```
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+```
+Add the ROS2 GPG key with apt
+```
+sudo apt update && sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+```
+Add the repository to Ubuntu source list
+```
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+```
+Install ROS development tools
+```
+sudo apt update && sudo apt install ros-dev-tools
+```
+Install ROS Iron desktop
+```
+sudo apt install ros-iron-desktop
+```
+
+# ROS2 Training Tutorials v1.0
 This is the activities and instructions to start.
 
-### Activity 2.1 Workspace & Package
+### Activity 2.1: Workspace & Package
 * Clone the repository http://github.com/twming/ros2_training_tutorial.
 * Move "my_node" folder to ~/dev_ws/src
 * Inspect the CMakeList.txt and package.xml files, check the package name and project name is “my_node”
 
-### Activity 2.2 Colcon build
+### Activity 2.2: Colcon build
 * Run colcon build on “my_node"
 * Debug the build, if any error
   
-### Activity 2.3 Topic Publisher
+### Activity 2.3: Topic Publisher
 * Create “publisher.py” in “scripts”
 * Define “MinimalPublisher” class and String “topic“
 * Update new line in CMakeList.txt 
 >“scripts/publisher.py” 
 * Colcon build, source setup.bash and run.
 * Use ros2 topic echo /topic to check the message.
-
-
-Create publisher.py
+>publisher.py
 ```
 #!/usr/bin/env python3
-
 import rclpy
 from rclpy.node import Node
-
 from std_msgs.msg import String
 
-
 class MinimalPublisher(Node):
-
     def __init__(self):
         super().__init__('minimal_publisher')
         self.publisher_ = self.create_publisher(String, 'topic', 10)
@@ -57,18 +88,21 @@ if __name__ == '__main__':
     main()
 ```
 
-Create subscriber.py
+### Activity 2.4: Topic Subscriber
+* Create “subscriber.py” in “scripts”
+* Define “MinimalSubscriber” class and String “topic“
+* Update CMakeList.txt 
+>“scripts/subscriber.py” 
+* Colcon build and source setup.bash.
+* Run and test the output together with publisher.py
+>subscriber.py
 ```
 #!/usr/bin/env python3
-
 import rclpy
 from rclpy.node import Node
-
 from std_msgs.msg import String
 
-
 class MinimalSubscriber(Node):
-
     def __init__(self):
         super().__init__('minimal_subscriber')
         self.subscription = self.create_subscription(
@@ -81,7 +115,6 @@ class MinimalSubscriber(Node):
     def listener_callback(self, msg):
         self.get_logger().info('I heard: "%s"' % msg.data)
 
-
 def main(args=None):
     rclpy.init(args=args)
     minimal_subscriber = MinimalSubscriber()
@@ -89,20 +122,64 @@ def main(args=None):
     minimal_subscriber.destroy_node()
     rclpy.shutdown()
 
-
 if __name__ == '__main__':
     main()
 ```
-report_coordinate.py
+
+### Activity 2.5: turtle_move.py
+* Open “turtle_move.py” in “scripts”
+* Complete the code
+* Update CMakeList.txt 
+>“scripts/turtle_move.py” 
+* Colcon build, source setup.bash.
+* Run and observe movement in turtlesim
+>node name: “turtle_move”
+>topic name: “/turtle1/cmd_vel”
+>linear.x : 0.5
+>angular.z: 0.5
+
+### Activity 2.6: Create Launch File
+* Create a folder “launch” in “my_node”
+* Create “turtlesim_follow_launch.py”
+* Update CMakeList.txt 
+>“scripts/turtlesim_follow_launch.py” 
+* Colcon build, source setup.bash.
+* Run and observe movement in turtlesim
+
+### Activity 2.7: Create Interface Package
+* Create “my_interface” package using ROS command:
+>$ cd ~/dev_ws/src/
+>$ ros2 pkg create my_interface --build_type ament_cmake
+
+
+### Activity 2.8 Create TargetCoordinates.msg
+* In the “my_interface” package, create “msg” folder.
+* Create TargetCoordinates.msg, with below data type:
+>string id
+>int32 x
+>int32 y
+* Update CMakeList.txt and package.xml
+* Build the “my_interface” package
+* Check the interface message using ros2 command.
+
+### Activity 2.9: report_coordinate.py with TargetCoordinates
+* Duplicate “publisher.py” to “report_coordinate.py”
+* Modify the topic type to TargetCoordinates, rename to “coordinate”, publish below data:
+>	id: Peter
+>	x: 45
+>	y: 60
+* Run the report_coordinate.py 
+* Echo the /coordinate topic
+> $ ros2 topic echo /coordinate
+
+>report_coordinate.py
 ```
 #!/usr/bin/env python3
-
 import rclpy
 from rclpy.node import Node
 from my_interface.msg import TargetCoordinates
 
 class Report_Coordinate(Node):
-
     def __init__(self):
         super().__init__('report_coordinate')
         self.publisher_ = self.create_publisher(TargetCoordinates, 'coordinate', 10)     # CHANGE
@@ -128,7 +205,27 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-add_two_int_server.py
+
+### Activity 2.10: Create AddTwoInts.srv
+* In the “my_interface” package, create “srv” folder.
+* Create AddTwoInts.srv, with request and response.
+>int32 x
+>int32 y
+>- - -
+>int32 sum
+* Update CMakeList.txt and package.xml
+* Build the “my_interface” package
+* Check the interface message using ros2 command.
+
+### Activity 2.11: AddTwoInts Service Client and Serve
+* Create “add_two_int_client.py” and “add_two_int_server.py” using above codes and AddTwoInts.srv
+* Update CMakeList.txt and package.xml
+* Build the “my_node” package
+* Run each code in one terminal.
+> $ros2 run my_node add_two_int_server.py
+> $ros2 run my_node add_two_int_client.py 54 32
+
+>add_two_int_server.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -137,7 +234,6 @@ from rclpy.node import Node
 from my_interface.srv import AddTwoInt
 
 class MinimalService(Node):
-
     def __init__(self):
         super().__init__('minimal_service')
         self.srv = self.create_service(AddTwoInt, 'add_two_ints', self.add_two_ints_callback)
@@ -157,7 +253,7 @@ if __name__ == '__main__':
     main()
 ```
 
-add_two_int_client.py
+>add_two_int_client.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -182,13 +278,11 @@ class MinimalClientAsync(Node):
 
 def main():
     rclpy.init()
-
     minimal_client = MinimalClientAsync()
     response = minimal_client.send_request(int(sys.argv[1]), int(sys.argv[2]))
     minimal_client.get_logger().info(
         'Result of add_two_ints: for %d + %d = %d' %
         (int(sys.argv[1]), int(sys.argv[2]), response.sum))
-
     minimal_client.destroy_node()
     rclpy.shutdown()
 
@@ -196,7 +290,27 @@ if __name__ == '__main__':
     main()
 ```
 
-fibonacci_server.py
+### Activity 2.12: Create Fibonacci.action
+* In the “my_interface” package, create “action” folder.
+* Create Fibonacci.action, with goal, result and feedback.        
+> int32 order
+> ---
+> int32[] sequence
+> ---
+> int32[] partial_sequence
+* Update CMakeList.txt and package.xml
+* Build the “my_interface” package
+* Check the interface message using ros2 command.
+
+### Activity 2.13: Fibonacci Client and Server
+* Create “fibonacci_client.py” and “fibonacci_server.py” using above codes and Fibonacci.action
+* Update CMakeList.txt and package.xml
+* Build the “my_node” package
+* Run each code in one terminal.
+> $ros2 run my_node fibonacci_server.py
+> $ros2 run my_node fibonacci_client.py 12
+
+>fibonacci_server.py
 ```
 #!/usr/bin/env python3
 import time
@@ -239,7 +353,7 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-fibonacci_client.py
+>fibonacci_client.py
 ```
 #!/usr/bin/env python3
 import sys
@@ -289,8 +403,11 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+### Optional: Launch File
+* Create a launch file named "turtlesim_circle_launch.py" in launch folder
+* Launch the turtlesim_node and turtle_move.py
 
-turtlesim_circle_launch.py
+> turtlesim_circle_launch.py
 ```
 #!/usr/bin/env python3
 from launch import LaunchDescription
@@ -311,8 +428,7 @@ def generate_launch_description():
         ]
     )
 ```
-
-Custom msg/srv/action
+### Reference - Custom msg/srv/action
 ```
 TargetCoordinates.msg
 string id
@@ -331,6 +447,6 @@ int32 order
 int32[] sequence
 ---
 int32[] partial_sequence
-
 ```
+
 Thank you! That's all.
