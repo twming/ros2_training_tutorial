@@ -13,10 +13,10 @@ def main(args=None):
     # Create a publish topic "pub" with Twist, link to /turtle1/cmd_vel, QoS is 10
 
     
-    # Initialize move=Twist(), set your move in while loop
+    # Initialize move=Twist(), set your move in while rclpy.ok()
     
 
-    # Spin/shutdown you node
+    # Spin/shutdown your node
 
 
 
