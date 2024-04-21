@@ -38,7 +38,7 @@ sudo apt install ros-iron-desktop
 # Software/Packages Requirements
 These are the required software and packages.
 ```
-sudo apt install ros-iron-joint-state-publisher
+sudo apt install ros-iron-joint-state-publisher-gui
 sudo snap install --classic code
 ```
 
