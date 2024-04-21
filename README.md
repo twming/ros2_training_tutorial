@@ -259,12 +259,12 @@ ros2 run my_node add_two_int_client.py 54 32
 import sys
 import rclpy
 from rclpy.node import Node
-from my_interface.srv import AddTwoInt
+from my_interface.srv import AddTwoInts
 
 class MinimalService(Node):
     def __init__(self):
         super().__init__('minimal_service')
-        self.srv = self.create_service(AddTwoInt, 'add_two_ints', self.add_two_ints_callback)
+        self.srv = self.create_service(AddTwoInts, 'add_two_ints', self.add_two_ints_callback)
 
     def add_two_ints_callback(self, request, response):
         response.sum = request.x + request.y
@@ -285,17 +285,17 @@ if __name__ == '__main__':
 ```
 #!/usr/bin/env python3
 import sys
-from my_interface.srv import AddTwoInt
+from my_interface.srv import AddTwoInts
 import rclpy
 from rclpy.node import Node
 
 class MinimalClientAsync(Node):
     def __init__(self):
         super().__init__('minimal_client_async')
-        self.cli = self.create_client(AddTwoInt, 'add_two_ints')
+        self.cli = self.create_client(AddTwoInts, 'add_two_ints')
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service not available, waiting again...')
-        self.req = AddTwoInt.Request()
+        self.req = AddTwoInts.Request()
 
     def send_request(self, a, b):
         self.req.x = a
