@@ -1,4 +1,4 @@
-# ROS2 Installation in Ubuntu 22.04
+![image](https://github.com/twming/ros2_training_tutorial/assets/16420462/3f00642c-d601-462d-a1e8-ac63350ef164)# ROS2 Installation in Ubuntu 22.04
 
 This are the ROS installation steps. 
 ### ROS2 Iron Installation in Ubuntu
@@ -32,6 +32,10 @@ Install ROS development tools
 sudo apt update && sudo apt install ros-dev-tools
 ```
 Install ROS Iron desktop
+```
+Source the setup file into the environment
+```
+echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
 ```
 sudo apt install ros-iron-desktop
 ```
