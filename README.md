@@ -1,4 +1,4 @@
-![image](https://github.com/twming/ros2_training_tutorial/assets/16420462/3f00642c-d601-462d-a1e8-ac63350ef164)# ROS2 Installation in Ubuntu 22.04
+### ROS2 Installation in Ubuntu 22.04
 
 This are the ROS installation steps. 
 ### ROS2 Iron Installation in Ubuntu
