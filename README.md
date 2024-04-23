@@ -33,12 +33,15 @@ sudo apt update && sudo apt install ros-dev-tools
 ```
 Install ROS Iron desktop
 ```
+sudo apt install ros-iron-desktop
+```
+
 Source the setup file into the environment
 ```
 echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
 ```
-sudo apt install ros-iron-desktop
-```
+
+
 # Software/Packages Requirements
 These are the required software and packages.
 ```
