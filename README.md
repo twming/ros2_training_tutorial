@@ -171,7 +171,20 @@ angular.z: 0.5
 cd ~/dev_ws/src/
 ros2 pkg create my_interface --build_type ament_cmake
 ```
+* Add below line to package.xml
+```
+<buildtool_depend>rosidl_default_generators</buildtool_depend>
+<exec_depend>rosidl_default_runtime</exec_depend>
+<member_of_group>rosidl_interface_packages</member_of_group>
+```
+* Add below line to CMakeLists.txt
+```
+find_package(rosidl_default_generators REQUIRED)
+rosidl_generate_interfaces(${PROJECT_NAME}
 
+)
+ament_export_dependencies(rosidl_default_runtime)
+```
 ### Activity 2.8 Create TargetCoordinates.msg
 * In the “my_interface” package, create “msg” folder.
 * Create TargetCoordinates.msg, with below data type:
