@@ -160,6 +160,37 @@ angular.z: 0.5
 ### Activity 2.6: Create Launch File
 * Create a folder “launch” in “my_node”
 * Create “turtlesim_follow_launch.py”
+```
+#!/usr/bin/env python3
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='turtlesim',
+            namespace='turtlesim1',
+            executable='turtlesim_node',
+            name='sim'
+        ),
+        Node(
+            package='turtlesim',
+            namespace='turtlesim2',
+            executable='turtlesim_node',
+            name='sim'
+        ),
+        Node(
+            package='turtlesim',
+            executable='mimic',
+            name='mimic',
+            remappings=[
+                ('/input/pose', '/turtlesim1/turtle1/pose'),
+                ('/output/cmd_vel', '/turtlesim2/turtle1/cmd_vel'),
+            ]
+        )
+    ])
+
+```
 * Update CMakeList.txt 
 > “scripts/turtlesim_follow_launch.py” 
 * Colcon build, source setup.bash.
