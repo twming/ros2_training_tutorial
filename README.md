@@ -1,73 +1,65 @@
-### ROS2 Installation in Ubuntu 22.04
-
-This are the ROS installation steps. 
-### ROS2 Iron Installation in Ubuntu
-Enable UTF-8 locale support
+### ROS2 Container Installation in Docker Desktop
+Go to Window PowerShell, enter below command. The installation will check your local repository, then go to twming/ros-humble-training Docker Hub to download, if not available. The installation may take 20 mins.
 ```
-locale  # check for UTF-8
-
-sudo apt update && sudo apt install locales
-sudo locale-gen en_US en_US.UTF-8
-sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-locale  # verify settings
+docker run --name "ros-humble-training" -it twming/ros-humble-training
 ```
-Enable Universe repository in Ubuntu
+To exit the container.
 ```
-sudo apt install software-properties-common
-sudo add-apt-repository universe
+exit
 ```
-Add the ROS2 GPG key with apt
+To stop the container.
 ```
-sudo apt update && sudo apt install curl -y
-sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+docker stop ros-humble-training
 ```
-Add the repository to Ubuntu source list
+To start the container.
 ```
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+docker start ros-humble-training
 ```
-Install ROS development tools
+To login the container.
 ```
-sudo apt update && sudo apt install ros-dev-tools
+docker exec -it ros-humble-training /bin/bash
 ```
-Install ROS Iron desktop
+To setup the ROS environment in docker
 ```
-sudo apt install ros-iron-desktop
+source bashrc
 ```
 
-Source the setup file into the environment
-```
-echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
-```
-
-
-# Software/Packages Requirements
-These are the required software and packages.
-```
-sudo apt install ros-iron-joint-state-publisher-gui
-sudo snap install --classic code
-```
-
-# ROS2 Training Tutorials v1.0
+# ROS2 Training Tutorials v2.0
 This is the activities and instructions to start.
 
 ### Activity 2.1: Workspace & Package
-* Clone the repository http://github.com/twming/ros2_training_tutorial.
-* Move "my_node" folder to ~/dev_ws/src
-* Inspect the CMakeList.txt and package.xml files, check the package name and project name is “my_node”
+* Go to the dev_ws/src workspace
+```
+cd ~/dev_ws/src
+```
+* Create "my_node" python package
+```
+ros2 pkg create my_node  --build-type ament_python
+```
 
 ### Activity 2.2: Colcon build
-* Run colcon build on “my_node"
+* Go to the dev_ws folder
+```
+cd ~/dev_ws
+```
+* Build the "my_node" package
+```
+colcon build
+```
 * Debug the build, if any error
   
 ### Activity 2.3: Topic Publisher
-* Create “publisher.py” in “scripts”
+* Create “publisher.py” in my_node/my_node folder
 * Define “MinimalPublisher” class and String “topic“
-* Update new line in CMakeList.txt 
-> “scripts/publisher.py” 
-* Colcon build, source setup.bash and run.
+* Update new entry line in setup.py
+```
+“publisher=my_node.publisher:main”,
+```
+* Colcon build, source setup.bash and run
 * Use ros2 topic echo /topic to check the message.
+```
+ros2 run my_node publisher
+```
 > [!TIP]
 > publisher.py
 ```
@@ -103,12 +95,17 @@ if __name__ == '__main__':
 ```
 
 ### Activity 2.4: Topic Subscriber
-* Create “subscriber.py” in “scripts”
+* Create “subscriber.py” in my_node/my_node folder
 * Define “MinimalSubscriber” class and String “topic“
-* Update CMakeList.txt 
-> “scripts/subscriber.py” 
-* Colcon build and source setup.bash.
-* Run and test the output together with publisher.py
+* Update new entry line in setup.py
+```
+“subscriber=my_node.subscriber:main”,
+```
+* Colcon build, source setup.bash and run
+```
+ros2 run my_node subscriber
+```
+* Run and test the output together with publisher
 > [!TIP]
 > subscriber.py
 ```
@@ -141,25 +138,146 @@ if __name__ == '__main__':
     main()
 ```
 
-### Activity 2.5: turtle_move.py
-* Open “turtle_move.py” in “scripts”
-* Complete the code
-* Update CMakeList.txt 
-> “scripts/turtle_move.py” 
-* Colcon build, source setup.bash.
+### Activity 2.5: draw_circle.py
+* Create “draw_circle.py” in my_node
+* Complete the code.
+* Update new entry line in setup.py
+```
+“draw_circle=my_node.draw_circle:main”,
+```
+* Colcon build, source setup.bash and run
 * Run and observe movement in turtlesim
 > [!TIP]
 > Node and Topic Information
 ```
-node name: “turtle_move”
+node name: “DrawCircleNode”
 topic name: “/turtle1/cmd_vel”
-linear.x : 0.5
-angular.z: 0.5
+linear.x : 2.0
+angular.z: 1.0
+```
+> [!TIP]
+> draw_circle.py
+```
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Twist
+
+class DrawCircleNode(Node):
+    def __init__(self):
+        super().__init__(‘__________')
+        self.publisher_ = self.create_publisher(Twist, __________', 10)
+        self.timer = self.create_timer(0.5, self.send_velocity_command)
+
+    def send_velocity_command(self):
+        msg = Twist()
+        msg.linear.x=__________
+        msg.angular.z=__________
+        self.publisher_.publish(msg)
+        self.get_logger().info("Twist %f %f" % (msg.linear.x,msg.angular.z))
+
+def main(args=None):
+    rclpy.init(args=args)
+    drawnode = DrawCircleNode()
+    rclpy.spin(drawnode)
+    drawnode.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
 ```
 
-### Activity 2.6: Create Launch File
+### Activity 2.6: pose_subscriber.py
+* Create a new python file “pose_subscriber.py”
+* Complete the code.
+* Update new entry line in setup.py
+```
+“pose_subscriber=my_node.pose_subscriber:main”,
+```
+* Colcon build, source setup.bash.
+* Run and observe movement in turtlesim
+> [!TIP]
+> pose_subscriber.py
+```
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from turtlesim.msg import Pose
+
+class PoseSubscriberNode(Node):
+    def __init__(self):
+        super().__init__('PoseSubscriberNode')
+        self.subscription = self.create_subscription(
+            Pose,
+            '/turtle1/pose',
+            self.pose_call_back,
+            10)
+        self.subscription  # prevent unused variable warning
+
+    def pose_call_back(self, pose:Pose):
+        self.get_logger().info("Pose: ("+str(pose.x)+","+str(pose.y)+")")
+
+def main(args=None):
+    rclpy.init(args=args)
+    subnode = PoseSubscriberNode()
+    rclpy.spin(subnode)
+    subnode.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+```
+
+### Activity 2.7: turtle_controller.py
+* Create a new python file “turtle_controller.py”
+* Complete the code.
+* Update new entry line in setup.py
+```
+“turtle_contoller=my_node.turtle_contoller:main”,
+```
+* Colcon build, source setup.bash.
+* Run and observe movement in turtlesim
+> [!TIP]
+> turtle_controller.py
+```
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Twist
+from turtlesim.msg import Pose
+
+class TurtleControllerNode(Node):
+    def __init__(self):
+        super().__init__('TurtleControllerNode')
+        self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
+        self.subscription = self.create_subscription(Pose,'/turtle1/pose',self.pose_call_back,10)
+        self.subscription  # prevent unused variable warning
+
+    def pose_call_back(self, pose:Pose):
+        cmd = Twist()
+        if pose.x>9 or pose.x<2 or pose.y<2 or pose.y>9:
+            cmd.linear.x=1.0
+            cmd.angular.z=0.9
+        else:
+            cmd.linear.x=5.0
+            cmd.angular.z=0.0
+        self.publisher_.publish(cmd)
+        self.get_logger().info("Twist %f %f" % (cmd.linear.x,cmd.angular.z))
+
+def main(args=None):
+    rclpy.init(args=args)
+    turtlecontrollernode = TurtleControllerNode()
+    rclpy.spin(turtlecontrollernode)
+    turtlecontrollernode.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+```
+
+### Activity 2.8: Create Launch File
 * Create a folder “launch” in “my_node”
-* Create “turtlesim_follow_launch.py”
+* Create “turtlesim_follow_launch.py” in "launch" folder
 ```
 #!/usr/bin/env python3
 from launch import LaunchDescription
@@ -191,12 +309,19 @@ def generate_launch_description():
     ])
 
 ```
-* Update CMakeList.txt 
-> “scripts/turtlesim_follow_launch.py” 
+* Add below line to setup.py header
+```
+import os
+from glob import glob
+```
+* Add below line to setup.py data_files arryay
+```
+(os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*')))
+```
 * Colcon build, source setup.bash.
-* Run and observe movement in turtlesim
+* Run together with tele_op to observe movement in turtlesim
 
-### Activity 2.7: Create Interface Package
+### Activity 2.9: Create Interface Package
 * Create “my_interface” package using ROS command:
 ```
 cd ~/dev_ws/src/
@@ -216,7 +341,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 )
 ament_export_dependencies(rosidl_default_runtime)
 ```
-### Activity 2.8 Create TargetCoordinates.msg
+### Activity 2.10 Create TargetCoordinates.msg
 * In the “my_interface” package, create “msg” folder.
 * Create TargetCoordinates.msg, with below data type:
 ```
@@ -228,7 +353,7 @@ int32 y
 * Build the “my_interface” package
 * Check the interface message using ros2 command.
 
-### Activity 2.9: report_coordinate.py with TargetCoordinates
+### Activity 2.11: report_coordinate.py with TargetCoordinates
 * Duplicate “publisher.py” to “report_coordinate.py”
 * Modify the topic type to TargetCoordinates, rename to “coordinate”, publish below data:
 > [!NOTE]
@@ -238,7 +363,11 @@ id: Peter
 x: 45
 y: 60
 ```
-* Run the report_coordinate.py 
+* Update new entry line in setup.py
+```
+“report_coordinate=my_node.report_coordinate:main”, 
+```
+* Build and Run the report_coordinate.py 
 * Echo the /coordinate topic
 ```
 ros2 topic echo /coordinate
@@ -279,7 +408,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### Activity 2.10: Create AddTwoInts.srv
+### Activity 2.12: Create AddTwoInts.srv
 * In the “my_interface” package, create “srv” folder.
 * Create AddTwoInts.srv, with request and response.
 > [!NOTE]
@@ -294,9 +423,13 @@ int32 sum
 * Build the “my_interface” package
 * Check the interface message using ros2 command.
 
-### Activity 2.11: AddTwoInts Service Client and Serve
+### Activity 2.13: AddTwoInts Service Client and Serve
 * Create “add_two_int_client.py” and “add_two_int_server.py” using above codes and AddTwoInts.srv
-* Update CMakeList.txt and package.xml
+* Update new entry line in setup.py
+```
+“add_two_int_server=my_node.add_two_int_server:main”,
+“add_two_int_client=my_node.add_two_int_client:main”,
+```
 * Build the “my_node” package
 * Run each code in one terminal.
 ```
@@ -369,7 +502,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### Activity 2.12: Create Fibonacci.action
+### Activity 2.14: Create Fibonacci.action
 * In the “my_interface” package, create “action” folder.
 * Create Fibonacci.action, with goal, result and feedback.
 
@@ -386,9 +519,13 @@ int32[] partial_sequence
 * Build the “my_interface” package
 * Check the interface message using ros2 command.
 
-### Activity 2.13: Fibonacci Client and Server
+### Activity 2.15: Fibonacci Client and Server
 * Create “fibonacci_client.py” and “fibonacci_server.py” using above codes and Fibonacci.action
-* Update CMakeList.txt and package.xml
+* Update new entry line in setup.py
+```
+“fibonacci_server=my_node.fibonacci_server:main”,
+“fibonacci_client=my_node.fibonacci_client:main”,
+```
 * Build the “my_node” package
 * Run each code in one terminal.
 ```
@@ -806,44 +943,43 @@ rmdir my_folder # remove my_folder directory
 rm file         # remove file
 sudo apt-get install package_name # install package_name
 ```
-### ROS Commands
-| ROS2  | ROS |
-| ------------- | ------------- |
-| ros2 pkg list/executables | rospack list |
-| ros2 pkg create --build-type ament_cmake/ament_python --node-name node pkg --dependencies rclcpp std_msgs | catkin_create_pkg pkg rospy std_msgs |
-| ros2 node list/info  | rosnode list/info  |
-| ros2 topic list/info/echo/pub  | rostopic list/info/echo/pub  |
-| ros2 service list/type/call | rosservice list/type/call |
-| ros2 action list/info/send_goal | rosaction list/info/send_goal |
-| ros2 interface list/show | rosmsg list/show  |
-| ros2 param list/get/set | rosparam list/get/set |
-| ros2 run pkg node --ros-args -p param1:=value1 -p param2:=value2 | rosrun pkg node param1:=value1 | 
-| ros2 run pkg node --ros-args --params-file /file.yaml | rosparam load file.yaml | 
-| ros2 run pkg node --ros-args -r node_topic:=topic_to_map | rosrun pkg node node_topic:=topic_to_map| 
-| ros2 run rqt_graph rqt_graph | rosrun rqt_graph rqt_graph |
-| ros2 run rqt_console rqt_console | rosrun rqt_console rqt_console |
-| ros2 run rqt_tf_tree rqt_tf_tree | rosrun rqt_tf_tree rqt_tf_tree |
-| colcon build --packages-select pkg | catkin_make -DCATKIN_WHITELIST_PACKAGES="pkg" |
+### ROS2 Humble Installation in Ubuntu
 
-### Custom msg/srv/action
+Enable UTF-8 locale support
 ```
-TargetCoordinates.msg
-string id
-int32 x
-int32 y
+locale  # check for UTF-8
 
-AddTwoInt.srv
-int32 x
-int32 y
----
-int32 sum
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
-Fibonacci.action
-int32 order
----
-int32[] sequence
----
-int32[] partial_sequence
+locale  # verify settings
+```
+Enable Universe repository in Ubuntu
+```
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+```
+Add the ROS2 GPG key with apt
+```
+sudo apt update && sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+```
+Add the repository to Ubuntu source list
+```
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+```
+Install ROS development tools
+```
+sudo apt update && sudo apt install ros-dev-tools
+```
+Install ROS Iron desktop
+```
+sudo apt install ros-iron-desktop
 ```
 
-Thank you! That's all.
+Source the setup file into the environment
+```
+echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
+```
