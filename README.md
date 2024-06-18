@@ -325,7 +325,7 @@ from glob import glob
 * Create “my_interface” package using ROS command:
 ```
 cd ~/dev_ws/src/
-ros2 pkg create my_interface --build_type ament_cmake
+ros2 pkg create my_interface --build-type ament_cmake
 ```
 * Add below line to package.xml
 ```
