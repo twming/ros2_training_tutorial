@@ -165,8 +165,8 @@ from geometry_msgs.msg import Twist
 
 class DrawCircleNode(Node):
     def __init__(self):
-        super().__init__(‘__________')
-        self.publisher_ = self.create_publisher(Twist, __________', 10)
+        super().__init__('__________')
+        self.publisher_ = self.create_publisher(Twist, '__________', 10)
         self.timer = self.create_timer(0.5, self.send_velocity_command)
 
     def send_velocity_command(self):
