@@ -233,7 +233,7 @@ if __name__ == '__main__':
 * Complete the code.
 * Update new entry line in setup.py
 ```
-"turtle_contoller=my_node.turtle_contoller:main",
+"turtle_controller=my_node.turtle_controller:main",
 ```
 * Colcon build, source setup.bash.
 * Run and observe movement in turtlesim
