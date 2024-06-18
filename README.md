@@ -53,7 +53,7 @@ colcon build
 * Define “MinimalPublisher” class and String “topic“
 * Update new entry line in setup.py
 ```
-“publisher=my_node.publisher:main”,
+"publisher=my_node.publisher:main",
 ```
 * Colcon build, source setup.bash and run
 * Use ros2 topic echo /topic to check the message.
@@ -99,7 +99,7 @@ if __name__ == '__main__':
 * Define “MinimalSubscriber” class and String “topic“
 * Update new entry line in setup.py
 ```
-“subscriber=my_node.subscriber:main”,
+"subscriber=my_node.subscriber:main",
 ```
 * Colcon build, source setup.bash and run
 ```
@@ -143,7 +143,7 @@ if __name__ == '__main__':
 * Complete the code.
 * Update new entry line in setup.py
 ```
-“draw_circle=my_node.draw_circle:main”,
+"draw_circle=my_node.draw_circle:main",
 ```
 * Colcon build, source setup.bash and run
 * Run and observe movement in turtlesim
@@ -192,7 +192,7 @@ if __name__ == '__main__':
 * Complete the code.
 * Update new entry line in setup.py
 ```
-“pose_subscriber=my_node.pose_subscriber:main”,
+"pose_subscriber=my_node.pose_subscriber:main",
 ```
 * Colcon build, source setup.bash.
 * Run and observe movement in turtlesim
@@ -233,7 +233,7 @@ if __name__ == '__main__':
 * Complete the code.
 * Update new entry line in setup.py
 ```
-“turtle_contoller=my_node.turtle_contoller:main”,
+"turtle_contoller=my_node.turtle_contoller:main",
 ```
 * Colcon build, source setup.bash.
 * Run and observe movement in turtlesim
@@ -365,7 +365,7 @@ y: 60
 ```
 * Update new entry line in setup.py
 ```
-“report_coordinate=my_node.report_coordinate:main”, 
+"report_coordinate=my_node.report_coordinate:main", 
 ```
 * Build and Run the report_coordinate.py 
 * Echo the /coordinate topic
@@ -427,8 +427,8 @@ int32 sum
 * Create “add_two_int_client.py” and “add_two_int_server.py” using above codes and AddTwoInts.srv
 * Update new entry line in setup.py
 ```
-“add_two_int_server=my_node.add_two_int_server:main”,
-“add_two_int_client=my_node.add_two_int_client:main”,
+"add_two_int_server=my_node.add_two_int_server:main",
+"add_two_int_client=my_node.add_two_int_client:main",
 ```
 * Build the “my_node” package
 * Run each code in one terminal.
@@ -523,8 +523,8 @@ int32[] partial_sequence
 * Create “fibonacci_client.py” and “fibonacci_server.py” using above codes and Fibonacci.action
 * Update new entry line in setup.py
 ```
-“fibonacci_server=my_node.fibonacci_server:main”,
-“fibonacci_client=my_node.fibonacci_client:main”,
+"fibonacci_server=my_node.fibonacci_server:main",
+"fibonacci_client=my_node.fibonacci_client:main",
 ```
 * Build the “my_node” package
 * Run each code in one terminal.
