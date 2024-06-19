@@ -760,7 +760,7 @@ if __name__ == '__main__':
 ```
 "initial_pose=demo1.initial_pose:main",
 ```
-
+### Activity 3.5: Move Turtlebot 
 > [!TIP]
 > trajectory.py
 ```
@@ -798,7 +798,7 @@ if __name__ == '__main__':
 ```
 "trajectory=demo1.trajectory:main",
 ```
-
+### Activity 3.6: LiDAR data 
 > [!TIP]
 > laser_data.py
 ```
@@ -840,7 +840,7 @@ if __name__ == '__main__':
 ```
 "laser_data=demo1.laser_data:main",
 ```
-
+### Activity 3.7: Avoid Obstacle 
 > [!TIP]
 > avoid_obstacle.py
 ```
@@ -885,7 +885,7 @@ if __name__ == '__main__':
 ```
 "avoid_obstacle=demo1.avoid_obstacle:main",
 ```
-
+### Activity 3.8: Path Planning 
 > [!TIP]
 > path_planning.py
 ```
@@ -967,6 +967,7 @@ if __name__ == '__main__':
 "path_planning=demo1.path_planning:main",
 ```
 
+### Activity 3.9: Autonomous Exploring
 > [!TIP]
 > autonomous_exploring.py
 ```
