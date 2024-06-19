@@ -712,8 +712,8 @@ class VelocityPublisher(Node):
         self.move = Twist()
 
     def publish_velocity(self):
-        self.move.linear.x = 0.8
-        self.move.angular.z = 0.8
+        self.move.linear.x = 0.1
+        self.move.angular.z = 0.2
         self.publisher.publish(self.move)
         self.get_logger().info(f'Publishing: linear x={self.move.linear.x} angular z={self.move.angular.z}')
 
