@@ -678,8 +678,8 @@ class InitialPosePublisher(Node):
             initial_pose.header.stamp = self.get_clock().now().to_msg()
             initial_pose.header.frame_id = "map"  # Or whatever frame you are using
             initial_pose.pose.pose = msg.pose.pose
-            initial_pose.pose.pose = msg.pose.pose.position.x=0.0
-            initial_pose.pose.pose = msg.pose.pose.position.y=0.0
+            initial_pose.pose.pose.position.x=msg.pose.pose.position.x+2.0
+            initial_pose.pose.pose.position.y=msg.pose.pose.position.y+0.5
             self.publisher.publish(initial_pose)
             self.first_pose_received = True
             self.get_logger().info('Initial pose has been set and published.')
