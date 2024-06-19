@@ -1043,7 +1043,7 @@ rmdir my_folder # remove my_folder directory
 rm file         # remove file
 sudo apt-get install package_name # install package_name
 ```
-### ROS2 Humble Installation in Ubuntu
+### ROS Humble Installation in Ubuntu
 
 Enable UTF-8 locale support
 ```
