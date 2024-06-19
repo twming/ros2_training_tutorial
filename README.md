@@ -1074,12 +1074,12 @@ Install ROS development tools
 ```
 sudo apt update && sudo apt install ros-dev-tools
 ```
-Install ROS Iron desktop
+Install ROS Humble desktop
 ```
-sudo apt install ros-iron-desktop
+sudo apt install ros-humble-desktop
 ```
 
 Source the setup file into the environment
 ```
-echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 ```
