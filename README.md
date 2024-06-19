@@ -652,7 +652,35 @@ def generate_launch_description():
         ]
     )
 ```
-### SLAM Navigation
+### LiDAR, SLAM and Navigation
+### Activity 3.1: Controlling Turtlebot3 Burger using Teleop Keyboard
+* Choose one to the world below, launch the Burger into the world and teleop it around the world
+Terminal 1:
+Turtle World
+```
+ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+```
+House World
+```
+ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
+```
+Teleop Keyboard
+```
+ros2 run turtlebot3_teleop teleop_keyboard
+```
+Use you w/x/a/d to move forward, backward, left and right. s to stop the robot.
+### Activity 3.2: Exploring the world using LiDAR and SLAM
+* Start the Turtle World, activate the SLAM node to collect the environment data using LiDAR, save the map to local drive
+Turtle World
+```
+ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+```
+
+```
+ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+```
+
+
 > [!TIP]
 > initial_pose.py
 ```
