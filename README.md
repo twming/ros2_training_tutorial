@@ -654,33 +654,67 @@ def generate_launch_description():
 ```
 ### LiDAR, SLAM and Navigation
 ### Activity 3.1: Controlling Turtlebot3 Burger using Teleop Keyboard
-* Choose one to the world below, launch the Burger into the world and teleop it around the world
-Terminal 1:
-Turtle World
+Choose one to the world below, launch the Burger into the world and teleop it around the world
+* Terminal 1: Turtle World or House World
 ```
 ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 ```
-House World
 ```
 ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
 ```
-Teleop Keyboard
+* Terminal 2: Teleop Keyboard
 ```
 ros2 run turtlebot3_teleop teleop_keyboard
 ```
-Use you w/x/a/d to move forward, backward, left and right. s to stop the robot.
+Use W/X/A/D to move forward, backward, left and right. S to stop the robot.
+
 ### Activity 3.2: Exploring the world using LiDAR and SLAM
-* Start the Turtle World, activate the SLAM node to collect the environment data using LiDAR, save the map to local drive
-Turtle World
+Start the Turtle World, activate the SLAM node to collect the environment data using LiDAR, save the map to local drive
+* Terminal 1: Turtle World
 ```
 ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 ```
-
+* Terminal 2: SLAM
+```
+ros2 launch turtlebot3_cartographer cartographer.launch.py use_sim_time:=True
+```
+* Terminal 3: Teleop Keyboard
+```
+ros2 run turtlebot3_teleop teleop_keyboard
+```
+* Terminal 4: Save Map
+```
+ros2 run nav2_map_server map_saver_cli -f ~/map
+```
+### Activity 3.3: Navigate using SLAM map
+Start the Turtle World, load the map and navigation node, initialize the pose and navigate within the map.
+* Terminal 1: Turtle World
 ```
 ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 ```
+* Terminal 2: Load the map
+```
+ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True autostart:=True map:=$HOME/map.yaml
+```
+* Terminal 3: Load RViz2, initialize pose and navigate
+```
+ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz 
+```
 
-
+### Activity 3.4: Initialize Pose 
+Start the Turtle World, load the map and navigation node, initialize the pose using python.
+* Terminal 1: Turtle World
+```
+ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+```
+* Terminal 2: Navigation Node
+```
+ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml
+```
+* Terminal 3: Initialize pose
+```
+ros2 run demo1 initial_pose
+```
 > [!TIP]
 > initial_pose.py
 ```
@@ -722,6 +756,11 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"initial_pose=demo1.initial_pose:main",
+```
+
 > [!TIP]
 > trajectory.py
 ```
