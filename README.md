@@ -794,6 +794,11 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"trajectory=demo1.trajectory:main",
+```
+
 > [!TIP]
 > laser_data.py
 ```
@@ -831,6 +836,11 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"laser_data=demo1.laser_data:main",
+```
+
 > [!TIP]
 > avoid_obstacle.py
 ```
@@ -871,6 +881,11 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"avoid_obstacle=demo1.avoid_obstacle:main",
+```
+
 > [!TIP]
 > path_planning.py
 ```
@@ -947,6 +962,11 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"path_planning=demo1.path_planning:main",
+```
+
 > [!TIP]
 > autonomous_exploring.py
 ```
@@ -1002,6 +1022,10 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+```
+* Update new entry line in setup.py
+```
+"autonomous_exploring=demo1.autonomous_exploring:main",
 ```
 
 # Reference
