@@ -814,17 +814,18 @@ from rclpy.node import Node
 from rclpy.action import ActionClient
 from geometry_msgs.msg import PoseStamped
 from nav2_msgs.action import NavigateToPose
+from action_msgs.msg import GoalStatus
 
 class NavigationNode(Node):
     def __init__(self):
         super().__init__('navigation_node')
         self.client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
+        self.status = GoalStatus.STATUS_EXECUTING
         self.waypoints = [
-            [( -0.5, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0)],
-            [(0.0, 2.0, 0.0), (0.0, 0.0, 0.0, 1.0)],
-            [(2.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0)],
-            [(0.0, -2.0, 0.0), (0.0, 0.0, 0.0, 1.0)],
-            [(-2.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0)],
+            [(2.0, 2.5, 0.0), (0.0, 0.0, 0.0, 1.0)],
+            [(4.0, 0.5, 0.0), (0.0, 0.0, 0.0, 1.0)],
+            [(2.0, -1.5, 0.0), (0.0, 0.0, 0.0, 1.0)],
+            [(0.0, 0.5, 0.0), (0.0, 0.0, 0.0, 1.0)],
         ]
 
     def send_goal(self, pose):
@@ -838,7 +839,7 @@ class NavigationNode(Node):
         goal_msg.pose.pose.orientation.w = pose[1][3]
         goal_msg.pose.header.frame_id = 'map'
         goal_msg.pose.header.stamp = self.get_clock().now().to_msg()
-self.get_logger().info(f'Going for goal: {goal_msg.pose.pose}')
+        self.get_logger().info(f'Going for goal: {goal_msg.pose.pose}')
         
         self.client.wait_for_server()
         send_goal_future = self.client.send_goal_async(goal_msg)
@@ -857,6 +858,7 @@ self.get_logger().info(f'Going for goal: {goal_msg.pose.pose}')
     def get_result_callback(self, future):
         result = future.result().result
         self.get_logger().info(f'Result: {result}')
+        self.status=GoalStatus.STATUS_SUCCEEDED
 
 def main(args=None):
     rclpy.init(args=args)
@@ -865,8 +867,12 @@ def main(args=None):
     # Loop to send goals
     while rclpy.ok():
         for pose in navigation_node.waypoints:
+            navigation_node.status=GoalStatus.STATUS_EXECUTING
             navigation_node.send_goal(pose)
-            rclpy.spin_once(navigation_node)
+            while navigation_node.status != GoalStatus.STATUS_SUCCEEDED:
+                rclpy.spin_once(navigation_node)
+                
+            navigation_node.get_logger().info(f' -------------------------------Start Next Goal -------------------------------')
 
     navigation_node.destroy_node()
     rclpy.shutdown()
