@@ -655,12 +655,9 @@ def generate_launch_description():
 ### LiDAR, SLAM and Navigation
 ### Activity 3.1: Controlling Turtlebot3 Burger using Teleop Keyboard
 Choose one to the world below, launch the Burger into the world and teleop it around the world
-* Terminal 1: Turtle World or House World
+* Terminal 1: Launch Turtle World into Gazebo
 ```
 ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
-```
-```
-ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
 ```
 * Terminal 2: Teleop Keyboard
 ```
@@ -668,7 +665,17 @@ ros2 run turtlebot3_teleop teleop_keyboard
 ```
 Use W/X/A/D to move forward, backward, left and right. S to stop the robot.
 
-### Activity 3.2: Exploring the world using LiDAR and SLAM
+### Activity 3.2: LiDAR Scan Data in RViz
+Explore the LiDAR data using RViz
+* Terminal 1: Launch Turtle World into Gazebo
+```
+ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+```
+* Terminal 2: Launch RViz
+```
+ros2 run rviz2 rviz2
+```
+### Activity 3.3: Exploring the world using LiDAR and SLAM
 Start the Turtle World, activate the SLAM node to collect the environment data using LiDAR, save the map to local drive
 * Terminal 1: Turtle World
 ```
@@ -686,9 +693,9 @@ ros2 run turtlebot3_teleop teleop_keyboard
 ```
 ros2 run nav2_map_server map_saver_cli -f ~/map
 ```
-### Activity 3.3: Navigate using SLAM map
+### Activity 3.4: Navigate using SLAM map
 Start the Turtle World, load the map and navigation node, initialize the pose and navigate within the map.
-* Terminal 1: Turtle World
+* Terminal 1: Tu4tle World
 ```
 ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 ```
@@ -700,8 +707,31 @@ ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True autostart:=True ma
 ```
 ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz 
 ```
-
-### Activity 3.4: Initialize Pose 
+### Activity 3.5: Turtlebot3 Control with Python
+* Pull a new package (demo1) to your workspace
+```
+cd ~/dev_ws/src
+git clone https://github.com/twming/ros2_training_tutorial
+```
+* Update new entry line in setup.py
+```
+"initial_pose=demo1.initial_pose:main",
+"trajectory=demo1.trajectory:main",
+"laser_data=demo1.laser_data:main",
+"avoid_obstacle=demo1.avoid_obstacle:main",
+"path_planning=demo1.path_planning:main",
+"autonomous_exploring=demo1.autonomous_exploring:main",
+```
+* Build the demo1 package
+```
+cd ~/dev_ws
+colcon build
+```
+* Source the demo1 package
+```
+source install/setup.bash
+```
+### Activity 3.5.1: Initialize Pose 
 Start the Turtle World, load the map and navigation node, initialize the pose using python.
 * Terminal 1: Turtle World
 ```
@@ -756,11 +786,8 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-* Update new entry line in setup.py
-```
-"initial_pose=demo1.initial_pose:main",
-```
-### Activity 3.5: Move Turtlebot 
+
+### Activity 3.5.2: Move Turtlebot 
 > [!TIP]
 > trajectory.py
 ```
@@ -794,11 +821,8 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-* Update new entry line in setup.py
-```
-"trajectory=demo1.trajectory:main",
-```
-### Activity 3.6: LiDAR data 
+
+### Activity 3.5.3: LiDAR data 
 > [!TIP]
 > laser_data.py
 ```
@@ -836,11 +860,8 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-* Update new entry line in setup.py
-```
-"laser_data=demo1.laser_data:main",
-```
-### Activity 3.7: Avoid Obstacle 
+
+### Activity 3.5.4: Avoid Obstacle 
 > [!TIP]
 > avoid_obstacle.py
 ```
@@ -881,11 +902,8 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-* Update new entry line in setup.py
-```
-"avoid_obstacle=demo1.avoid_obstacle:main",
-```
-### Activity 3.8: Path Planning 
+
+### Activity 3.5.5: Path Planning 
 > [!TIP]
 > path_planning.py
 ```
@@ -962,12 +980,8 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-* Update new entry line in setup.py
-```
-"path_planning=demo1.path_planning:main",
-```
 
-### Activity 3.9: Autonomous Exploring
+### Activity 3.5.6: Autonomous Exploring
 > [!TIP]
 > autonomous_exploring.py
 ```
@@ -1023,10 +1037,6 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-```
-* Update new entry line in setup.py
-```
-"autonomous_exploring=demo1.autonomous_exploring:main",
 ```
 
 # Reference
