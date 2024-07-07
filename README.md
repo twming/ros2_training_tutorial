@@ -433,8 +433,8 @@ int32 sum
 * Build the “my_node” package
 * Run each code in one terminal.
 ```
-ros2 run my_node add_two_int_server.py
-ros2 run my_node add_two_int_client.py 54 32
+ros2 run my_node add_two_int_server
+ros2 run my_node add_two_int_client 54 32
 ```
 > [!TIP]
 > add_two_int_server.py
@@ -529,8 +529,8 @@ int32[] partial_sequence
 * Build the “my_node” package
 * Run each code in one terminal.
 ```
-ros2 run my_node fibonacci_server.py
-ros2 run my_node fibonacci_client.py 12
+ros2 run my_node fibonacci_server
+ros2 run my_node fibonacci_client 12
 ```
 > [!TIP]
 > fibonacci_server.py
