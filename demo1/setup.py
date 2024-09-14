@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'demo1'
+package_name = 'autocar'
 
 setup(
     name=package_name,
@@ -20,6 +20,12 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            "initial_pose=autocar.initial_pose:main",
+            "trajectory=autocar.trajectory:main",
+            "laser_data=autocar.laser_data:main",
+            "avoid_obstacle=autocar.avoid_obstacle:main",
+            "path_planning=autocar.path_planning:main",
+            "autonomous_exploring=autocar.autonomous_exploring:main",
         ],
     },
 )
