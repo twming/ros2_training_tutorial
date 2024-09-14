@@ -695,7 +695,7 @@ ros2 run nav2_map_server map_saver_cli -f ~/map
 ```
 ### Activity 3.4: Navigate using SLAM map
 Start the Turtle World, load the map and navigation node, initialize the pose and navigate within the map.
-* Terminal 1: Tu4tle World
+* Terminal 1: Turtle World
 ```
 ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 ```
@@ -708,21 +708,21 @@ ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True autostart:=True ma
 ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz 
 ```
 ### Activity 3.5: Turtlebot3 Control with Python
-* Pull a new package (demo1) to your workspace
+* Pull a new package (autocar) to your workspace
 ```
 cd ~/dev_ws/src
 git clone https://github.com/twming/ros2_training_tutorial
 ```
 * Update new entry line in setup.py
 ```
-"initial_pose=demo1.initial_pose:main",
-"trajectory=demo1.trajectory:main",
-"laser_data=demo1.laser_data:main",
-"avoid_obstacle=demo1.avoid_obstacle:main",
-"path_planning=demo1.path_planning:main",
-"autonomous_exploring=demo1.autonomous_exploring:main",
+"initial_pose=autocar.initial_pose:main",
+"trajectory=autocar.trajectory:main",
+"laser_data=autocar.laser_data:main",
+"avoid_obstacle=autocar.avoid_obstacle:main",
+"path_planning=autocar.path_planning:main",
+"autonomous_exploring=autocar.autonomous_exploring:main",
 ```
-* Build the demo1 package
+* Build the autocar package
 ```
 cd ~/dev_ws
 colcon build
@@ -743,7 +743,7 @@ ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml
 ```
 * Terminal 3: Initialize pose
 ```
-ros2 run demo1 initial_pose
+ros2 run autocar initial_pose
 ```
 > [!TIP]
 > initial_pose.py
@@ -1037,6 +1037,15 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+```
+Start the Turtle World, start autonomous driving.
+* Terminal 1: Turtle World
+```
+ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+```
+* Terminal 2: Start autonomous drive
+```
+ros2 run autocar autonomous_exploring
 ```
 
 # Reference
