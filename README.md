@@ -1102,3 +1102,14 @@ Source the setup file into the environment
 ```
 echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 ```
+
+### Other ROS Development Tools
+
+Visual Studio Code (VS-Code)
+```
+sudo snap install code --classic
+```
+Multi-Window Terminator
+```
+sudo apt install terminator
+```
