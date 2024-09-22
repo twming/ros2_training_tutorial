@@ -675,7 +675,7 @@ from functools import partial
 
 class TurtleControllerWithPenNode(Node):
     def __init__(self):
-        super().__init__('TurtleControllerWithPenNode')
+        super().__init__('__________')
         self.previous_x = 0.0
         self.publisher_ = self.create_publisher(Twist, '__________', 10)
         self.subscription = self.create_subscription(Pose,'__________',self.pose_call_back,10)
