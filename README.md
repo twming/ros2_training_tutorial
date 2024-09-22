@@ -197,6 +197,12 @@ if __name__ == '__main__':
 * Colcon build, source setup.bash.
 * Run and observe movement in turtlesim
 > [!TIP]
+> Node and Topic Information
+```
+node name: “PoseSubscriberNode”
+topic name: “/turtle1/pose”
+```
+> [!TIP]
 > pose_subscriber.py
 ```
 #!/usr/bin/env python3
@@ -206,10 +212,10 @@ from turtlesim.msg import Pose
 
 class PoseSubscriberNode(Node):
     def __init__(self):
-        super().__init__('PoseSubscriberNode')
+        super().__init__('__________')
         self.subscription = self.create_subscription(
             Pose,
-            '/turtle1/pose',
+            '__________',
             self.pose_call_back,
             10)
         self.subscription  # prevent unused variable warning
@@ -238,6 +244,15 @@ if __name__ == '__main__':
 * Colcon build, source setup.bash.
 * Run and observe movement in turtlesim
 > [!TIP]
+> Node and Topic Information
+```
+node name: “TurtleControllerNode”
+publisher topic: “/turtle1/cmd_vel”
+subscriber topic: “/turtle1/pose”
+foward: linear.x=5.0, angular.z=0.0
+turn: linear.x=1.0, angular.z=0.9
+```
+> [!TIP]
 > turtle_controller.py
 ```
 #!/usr/bin/env python3
@@ -248,19 +263,19 @@ from turtlesim.msg import Pose
 
 class TurtleControllerNode(Node):
     def __init__(self):
-        super().__init__('TurtleControllerNode')
-        self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
-        self.subscription = self.create_subscription(Pose,'/turtle1/pose',self.pose_call_back,10)
+        super().__init__('__________')
+        self.publisher_ = self.create_publisher(Twist, '__________', 10)
+        self.subscription = self.create_subscription(Pose,'__________',self.pose_call_back,10)
         self.subscription  # prevent unused variable warning
 
     def pose_call_back(self, pose:Pose):
         cmd = Twist()
         if pose.x>9 or pose.x<2 or pose.y<2 or pose.y>9:
-            cmd.linear.x=1.0
-            cmd.angular.z=0.9
+            cmd.linear.x=__________
+            cmd.angular.z=__________
         else:
-            cmd.linear.x=5.0
-            cmd.angular.z=0.0
+            cmd.linear.x=__________
+            cmd.angular.z=__________
         self.publisher_.publish(cmd)
         self.get_logger().info("Twist %f %f" % (cmd.linear.x,cmd.angular.z))
 
@@ -627,6 +642,97 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+
+### Bonus: turtle_controller_with_pen.py
+* Create a new python file “turtle_controller_with_pen.py”
+* Complete the code.
+* Update new entry line in setup.py
+```
+"turtle_controller_with_pen=my_node.turtle_controller_with_pen:main",
+```
+* Colcon build, source setup.bash.
+* Run and observe movement in turtlesim
+> [!TIP]
+> Node and Topic Information
+```
+node name: “TurtleControllerWithPenNode”
+publisher topic: “/turtle1/cmd_vel”
+subscriber topic: “/turtle1/pose”
+set_pen service: “/turtle1/set_pen”
+Red: 255,0,0,3,0
+Green: 0,255,0,3,0
+```
+> [!TIP]
+> turtle_controller_with_pen.py
+```
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Twist
+from turtlesim.msg import Pose
+from turtlesim.srv import SetPen
+from functools import partial
+
+class TurtleControllerWithPenNode(Node):
+    def __init__(self):
+        super().__init__('TurtleControllerWithPenNode')
+        self.previous_x = 0.0
+        self.publisher_ = self.create_publisher(Twist, '__________', 10)
+        self.subscription = self.create_subscription(Pose,'__________',self.pose_call_back,10)
+        self.subscription  # prevent unused variable warning
+
+    def pose_call_back(self, pose:Pose):
+        cmd = Twist()
+        if pose.x>9 or pose.x<2 or pose.y<2 or pose.y>9:
+            cmd.linear.x=1.0
+            cmd.angular.z=0.9
+        else:
+            cmd.linear.x=5.0
+            cmd.angular.z=0.0
+        self.publisher_.publish(cmd)
+        self.get_logger().info("Twist %f %f" % (cmd.linear.x,cmd.angular.z))
+    
+        if pose.x>5.5 and self.previous_x<=5.5:
+            self.previous_x=pose.x
+            self.get_logger().info("Set Pen to Red!")
+            self.call_set_pen_service(__________)
+        elif pose.x<=5.5 and self.previous_x>5.5:
+            self.previous_x=pose.x
+            self.get_logger().info("Set Pen to Green!")
+            self.call_set_pen_service(__________)
+
+    def call_set_pen_service(self, r, g, b, width, off):
+        client = self.create_client(SetPen, "__________")
+        while not client.wait_for_service(1.0):
+            self.get_logger().log("Waiting for service ...")
+
+        request=SetPen.Request()
+        request.r = r
+        request.g = g
+        request.b = b 
+        request.width = width
+        request.off = off
+
+        future = client.call_async(request)
+        future.add_done_callback(partial(self.callback_set_pen))
+    
+    def callback_set_pen(self, future):
+        try:
+            response = future.result()
+        except Exception as e:
+            self.get_logger().error("Service call failed: %r" % (e,))
+
+def main(args=None):
+    rclpy.init(args=args)
+    turtlecontrollerwithpennode = TurtleControllerWithPenNode()
+    rclpy.spin(turtlecontrollerwithpennode)
+    turtlecontrollerwithpennode.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+```
+
 ### Optional: Launch File
 * Create a launch file named "turtlesim_circle_launch.py" in launch folder
 * Launch the turtlesim_node and turtle_move.py
