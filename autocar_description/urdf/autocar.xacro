@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="autocar">
+
+    <!-- Material Color and Definition -->
+    <material name="blue"><color rgba="0.0 0.0 0.8 1.0"/></material>
+    <material name="green"><color rgba="0.0 1.0 0.0 1.0"/></material>
+    <material name="red"><color rgba="0.8 0.0 0.0 1.0"/></material>
+
+    <!-- Propoerty parameters -->
+    <xacro:property name="base_length" value="___TODO___" />
+    <xacro:property name="base_width" value="___TODO___" />
+    <xacro:property name="base_height" value="___TODO___" />
+    <xacro:property name="wheel_radius" value="___TODO___" />
+    <xacro:property name="wheel_length" value="___TODO___" />
+
+    <link name="base_footprint_link" />
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="${base_length} ${base_width} ${base_height}" />
+            </geometry>
+            <origin xyz="0 0 ${base_height/2.0}" rpy="0 0 0" />
+            <material name="green" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${base_length} ${base_width} ${base_height}" />
+            </geometry>
+            <origin xyz="0 0 ${base_height/2.0}" rpy="0 0 0" />
+        </collision>
+    </link>
+
+    <link name="right_wheel_link">
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${-pi/2.0} 0 0" />
+            <material name="blue" />
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${-pi/2.0} 0 0" />     
+        </collision>
+    </link>
+
+    <link name="left_wheel_link">
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${-pi/2.0} 0 0" />
+            <material name="blue" />
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${-pi/2.0} 0 0" />     
+        </collision>
+    </link>
+
+    <link name="caster_wheel_link">
+        <visual>
+            <geometry>
+                <sphere radius="${wheel_radius/2.0}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="red" />
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${wheel_radius/2.0}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />   
+        </collision>
+    </link>
+
+    <joint name="base_footprint_base_joint" type="fixed">
+        <parent link="___TODO___" />
+        <child link="___TODO___" />
+        <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0" />
+    </joint>
+
+    <joint name="base_right_wheel_joint" type="continuous">
+        <parent link="___TODO___" />
+        <child link="___TODO___" />
+        <origin xyz="${-base_length/4.0} ${-(base_width+wheel_length)/2.0} 0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <joint name="base_left_wheel_joint" type="continuous">
+        <parent link="___TODO___" />
+        <child link="___TODO___" />
+        <origin xyz="${-base_length/4.0} ${(base_width+wheel_length)/2.0} 0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <joint name="base_caster_wheel_joint" type="fixed">
+        <parent link="___TODO___" />
+        <child link="___TODO___" />
+        <origin xyz="${base_length/3.0}  0 ${-wheel_radius/2.0}" rpy="0 0 0" />
+    </joint>
+
+</robot>
