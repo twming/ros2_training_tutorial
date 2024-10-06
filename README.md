@@ -1168,7 +1168,7 @@ rmdir my_folder # remove my_folder directory
 rm file         # remove file
 sudo apt-get install package_name # install package_name
 ```
-### ROS Humble Installation in Ubuntu
+### ROS Humble Desktop/Base Installation in Ubuntu
 
 Enable UTF-8 locale support
 ```
@@ -1203,10 +1203,44 @@ Install ROS Humble desktop
 ```
 sudo apt install ros-humble-desktop
 ```
+Install ROS Humble Basic (For Raspberry Pi)
+```
+sudo apt install ros-humble-ros-base
+```
 
 Source the setup file into the environment
 ```
 echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+```
+### Raspberry Pi Turtlebot3 Setup
+Edit the sshd_config file to set the ssh QoS to best effort
+```
+sudo nano /etc/ssh/sshd_config
+```
+Input below line at the bottom of the file
+```
+IPQoS cs0 cs0
+```
+Follow the ROS Humble Desktop/Base Installation in Ubuntu for Raspberry Pi, then install ros-humble-turtlebot3-bringup
+```
+sudo apt install ros-humble-turtlebot3-bringup
+```
+Input the environment data to the .bashrc
+```
+echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc
+echo 'echo ROS_DOMAIN_ID=30' >> ~/.bashrc
+echo 'echo TURTLEBOT3_MODEL=burger' >> ~/.bashrc
+echo 'echo LDS_MODEL=LDS-01' >> ~/.bashrc
+```
+Source and run the .bashrc 
+```
+source .bashrc
+```
+Setup the USB and OpenCR communication
+```
+sudo cp `ros2 pkg prefix turtlebot3_bringup`/share/turtlebot3_bringup/script/99-turtlebot3-cdc.rules /etc/udev/rules.d/
+sudo udevadm control --reload-rules
+sudo udevadm trigger
 ```
 
 ### Other ROS Development Tools
