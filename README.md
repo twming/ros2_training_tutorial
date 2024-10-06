@@ -1203,11 +1203,6 @@ Install ROS Humble desktop
 ```
 sudo apt install ros-humble-desktop
 ```
-Install ROS Humble Basic (For Raspberry Pi)
-```
-sudo apt install ros-humble-ros-base
-```
-
 Source the setup file into the environment
 ```
 echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
@@ -1223,14 +1218,15 @@ IPQoS cs0 cs0
 ```
 Follow the ROS Humble Desktop/Base Installation in Ubuntu for Raspberry Pi, then install ros-humble-turtlebot3-bringup
 ```
+sudo apt install ros-humble-ros-base
 sudo apt install ros-humble-turtlebot3-bringup
 ```
 Input the environment data to the .bashrc
 ```
 echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc
-echo 'echo ROS_DOMAIN_ID=30' >> ~/.bashrc
-echo 'echo TURTLEBOT3_MODEL=burger' >> ~/.bashrc
-echo 'echo LDS_MODEL=LDS-01' >> ~/.bashrc
+echo 'export ROS_DOMAIN_ID=30' >> ~/.bashrc
+echo 'export TURTLEBOT3_MODEL=burger' >> ~/.bashrc
+echo 'export LDS_MODEL=LDS-01' >> ~/.bashrc
 ```
 Source and run the .bashrc 
 ```
