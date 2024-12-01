@@ -643,7 +643,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### Bonus: turtle_controller_with_pen.py
+### Activity 2.16: turtle_controller_with_pen.py
 * Create a new python file “turtle_controller_with_pen.py”
 * Complete the code.
 * Update new entry line in setup.py
