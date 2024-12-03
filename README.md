@@ -732,6 +732,18 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+### Bonus: TurtleStatus Custom Topic
+* Create "TurtleStatus" topic interface with below fields:
+```
+float32 x
+float32 y
+float32 theta
+float32 linear
+float32 angular
+string tail
+```
+* Modify and implement the "TurtleStatus" topic in TurtleContollerWithSetPen (Activity 2.16)
+* Test the message by echo the topic /turtle1/turtle_status
 
 ### Optional: Launch File
 * Create a launch file named "turtlesim_circle_launch.py" in launch folder
