@@ -364,8 +364,8 @@ string id
 int32 x
 int32 y
 ```
-* Update CMakeList.txt and package.xml
-* Build the “my_interface” package
+* Update CMakeList.txt.
+* Build the “my_interface” package.
 * Check the interface message using ros2 command.
 
 ### Activity 2.11: report_coordinate.py with TargetCoordinates
@@ -434,8 +434,8 @@ int32 y
 ---
 int32 sum
 ```
-* Update CMakeList.txt and package.xml
-* Build the “my_interface” package
+* Update CMakeList.txt.
+* Build the “my_interface” package.
 * Check the interface message using ros2 command.
 
 ### Activity 2.13: AddTwoInts Service Client and Serve
@@ -530,8 +530,8 @@ int32[] sequence
 ---
 int32[] partial_sequence
 ```
-* Update CMakeList.txt and package.xml
-* Build the “my_interface” package
+* Update CMakeList.txt.
+* Build the “my_interface” package.
 * Check the interface message using ros2 command.
 
 ### Activity 2.15: Fibonacci Client and Server
