@@ -331,7 +331,7 @@ from glob import glob
 ```
 * Add below line to setup.py data_files arryay
 ```
-(os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*')))
+(os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.py')))
 ```
 * Colcon build, source setup.bash.
 * Run together with tele_op to observe movement in turtlesim
