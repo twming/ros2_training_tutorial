@@ -329,7 +329,7 @@ def generate_launch_description():
 import os
 from glob import glob
 ```
-* Add below line to setup.py data_files arryay
+* Add below line to setup.py data_files array
 ```
 (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.py')))
 ```
