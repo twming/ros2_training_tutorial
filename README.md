@@ -199,8 +199,8 @@ if __name__ == '__main__':
 > [!TIP]
 > Node and Topic Information
 ```
-node name: “PoseSubscriberNode”
-topic name: “/turtle1/pose”
+node name: "PoseSubscriberNode"
+topic name: "/turtle1/pose"
 ```
 > [!TIP]
 > pose_subscriber.py
@@ -246,9 +246,9 @@ if __name__ == '__main__':
 > [!TIP]
 > Node and Topic Information
 ```
-node name: “TurtleControllerNode”
-publisher topic: “/turtle1/cmd_vel”
-subscriber topic: “/turtle1/pose”
+node name: "TurtleControllerNode"
+publisher topic: "/turtle1/cmd_vel"
+subscriber topic: "/turtle1/pose"
 foward: linear.x=5.0, angular.z=0.0
 turn: linear.x=1.0, angular.z=0.9
 ```
@@ -655,10 +655,10 @@ if __name__ == '__main__':
 > [!TIP]
 > Node and Topic Information
 ```
-node name: “TurtleControllerWithPenNode”
-publisher topic: “/turtle1/cmd_vel”
-subscriber topic: “/turtle1/pose”
-set_pen service: “/turtle1/set_pen”
+node name: "TurtleControllerWithPenNode"
+publisher topic: "/turtle1/cmd_vel"
+subscriber topic: "/turtle1/pose"
+set_pen service: "/turtle1/set_pen"
 Red: 255,0,0,3,0
 Green: 0,255,0,3,0
 ```
