@@ -150,8 +150,8 @@ if __name__ == '__main__':
 > [!TIP]
 > Node and Topic Information
 ```
-node name: “DrawCircleNode”
-topic name: “/turtle1/cmd_vel”
+node name: "DrawCircleNode"
+topic name: "/turtle1/cmd_vel"
 linear.x : 2.0
 angular.z: 1.0
 ```
