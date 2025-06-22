@@ -352,7 +352,9 @@ ros2 pkg create my_interface --build-type ament_cmake
 ```
 find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
-
+  "msg/TargetCoordinates.msg"
+  #"srv/AddTwoInts.srv"
+  #"action/Fibonacci.action"
 )
 ament_export_dependencies(rosidl_default_runtime)
 ```
