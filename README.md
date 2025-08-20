@@ -469,7 +469,7 @@ class MinimalService(Node):
 
     def add_two_ints_callback(self, request, response):
         response.sum = request.x + request.y
-        self.get_logger().info('Incoming request\na: %i b: %i' % (request.x, request.y))
+        self.get_logger().info('Incoming request\nx: %i y: %i sum: %i' % (request.x, request.y, response.sum))
         return response
 
 def main(args=None):
