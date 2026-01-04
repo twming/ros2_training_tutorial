@@ -26,7 +26,6 @@ source bashrc
 
 # ROS2 Training Tutorials v2.0
 This is the activities and instructions to start.
-
 - [Activity 2.1: Workspace & Package](#activity-21-workspace--package)
 - [Activity 2.2: Colcon build](#activity-22-colcon-build)
 - [Activity 2.3: Topic Publisher](#activity-23-topic-publisher)
@@ -45,9 +44,7 @@ This is the activities and instructions to start.
 - [Activity 2.16: turtle_controller_with_pen.py](#activity-216-turtle_controller_with_penpy)
 - [Bonus: TurtleStatus Custom Topic](#bonus-turtlestatus-custom-topic)
 - [Optional: Launch File](#optional-launch-file)
-
 - [LiDAR, SLAM and Navigation](#lidar-slam-and-navigation)
-
 - [Activity 3.1: Controlling Turtlebot3 Burger using Teleop Keyboard](#activity-31-controlling-turtlebot3-burger-using-teleop-keyboard)
 - [Activity 3.2: LiDAR Scan Data in RViz](#activity-32-lidar-scan-data-in-rviz)
 - [Activity 3.3: Exploring the world using LiDAR and SLAM](#activity-33-exploring-the-world-using-lidar-and-slam)
@@ -59,7 +56,6 @@ This is the activities and instructions to start.
  - [Activity 3.5.4: Avoid Obstacle](#activity-354-avoid-obstacle)
  - [Activity 3.5.5: Path Planning](#activity-355-path-planning)
  - [Activity 3.5.6: Autonomous Exploring](#activity-356-autonomous-exploring)
-
 - [Reference](#reference)
 
 ### Activity 2.1: Workspace & Package
