@@ -26,7 +26,9 @@ source bashrc
 
 # ROS2 Training Tutorials v2.0
 This is the activities and instructions to start.
-[Activity 2.3: Topic Publisher](#activity-2-3-topic-publisher)
+
+[Activity 2.3: Topic Publisher](#activity-23-topic-publisher)
+
 ### Activity 2.1: Workspace & Package
 * Go to the dev_ws/src workspace
 ```
