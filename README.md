@@ -806,7 +806,7 @@ def generate_launch_description():
         ]
     )
 ```
-### LiDAR, SLAM and Navigation
+# LiDAR, SLAM and Navigation
 ### Activity 3.1: Controlling Turtlebot3 Burger using Teleop Keyboard
 Choose one to the world below, launch the Burger into the world and teleop it around the world
 * Terminal 1: Launch Turtle World into Gazebo
