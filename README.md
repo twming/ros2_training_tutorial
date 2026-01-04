@@ -27,7 +27,7 @@ source bashrc
 # ROS2 Training Tutorials v2.0
 This is the activities and instructions to start.
 
-- [Activity 2.1: Workspace & Package](#activity-21-workspace-package)
+- [Activity 2.1: Workspace & Package](#activity-21-workspace--package)
 - [Activity 2.2: Colcon build](#activity-22-colcon-build)
 - [Activity 2.3: Topic Publisher](#activity-23-topic-publisher)
 - [Activity 2.4: Topic Subscriber](#activity-24-topic-subscriber)
@@ -48,7 +48,7 @@ This is the activities and instructions to start.
 
 - [LiDAR, SLAM and Navigation](#lidar-slam-and-navigation)
 
-- [Activity 3.1: Controlling Turtlebot3 Burger using Teleop Keyboard](#activity-21-controlling-turtlebot3-burger-using-teleop-keyboard)
+- [Activity 3.1: Controlling Turtlebot3 Burger using Teleop Keyboard](#activity-31-controlling-turtlebot3-burger-using-teleop-keyboard)
 - [Activity 3.2: LiDAR Scan Data in RViz](#activity-32-lidar-scan-data-in-rviz)
 - [Activity 3.3: Exploring the world using LiDAR and SLAM](#activity-33-exploring-the-world-using-lidar-and-slam)
 - [Activity 3.4: Navigate using SLAM map](#activity-34-navigate-using-slam-map)
