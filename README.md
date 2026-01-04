@@ -440,8 +440,8 @@ int32 sum
 * Build the “my_interface” package.
 * Check the interface message using ros2 command.
 
-### Activity 2.13: AddTwoInts Service Client and Serve
-* Create “add_two_int_client.py” and “add_two_int_server.py” using above codes and AddTwoInts.srv
+### Activity 2.13: AddTwoInts Service Client and Server
+* Create “add_two_int_client.py” and “add_two_int_server.py” using below codes and AddTwoInts.srv
 * Update new entry line in setup.py
 ```
 "add_two_int_server=my_node.add_two_int_server:main",
@@ -537,7 +537,7 @@ int32[] partial_sequence
 * Check the interface message using ros2 command.
 
 ### Activity 2.15: Fibonacci Client and Server
-* Create “fibonacci_client.py” and “fibonacci_server.py” using above codes and Fibonacci.action
+* Create “fibonacci_client.py” and “fibonacci_server.py” using below codes and Fibonacci.action
 * Update new entry line in setup.py
 ```
 "fibonacci_server=my_node.fibonacci_server:main",
