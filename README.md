@@ -32,7 +32,7 @@ This is the activities and instructions to start.
 - [Activity 2.3: Topic Publisher](#activity-23-topic-publisher)
 - [Activity 2.4: Topic Subscriber](#activity-24-topic-subscriber)
 - [Activity 2.5: draw_circle.py](#activity-25-draw_circlepy)
-- [Activity 2.6: pose_subscriber.py](#activity-26-pose-subscriberpy)
+- [Activity 2.6: pose_subscriber.py](#activity-26-pose_subscriberpy)
 - [Activity 2.7: turtle_controller.py](#activity-27-turtle_controllerpy)
 - [Activity 2.8: Create Launch File](#activity-28-create-launch-file)
 - [Activity 2.9: Create Interface Package](#activity-29-create-interface-package)
