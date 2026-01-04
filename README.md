@@ -25,7 +25,7 @@ source bashrc
 ```
 
 # ROS2 Training Tutorials v2.0
-This is the activities and instructions to start.
+This are the activities and instructions to start.
 - [Activity 2.1: Workspace & Package](#activity-21-workspace--package)
 - [Activity 2.2: Colcon build](#activity-22-colcon-build)
 - [Activity 2.3: Topic Publisher](#activity-23-topic-publisher)
