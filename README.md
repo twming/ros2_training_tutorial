@@ -326,7 +326,7 @@ if __name__ == '__main__':
 
 ### Activity 2.8: Create Launch File
 * Create a folder “launch” in “my_node”
-* Create “turtlesim_follow_launch.py” in "launch" folder
+* Create “turtlesim_controller_launch.py” in "launch" folder
 ```
 #!/usr/bin/env python3
 from launch import LaunchDescription
@@ -336,27 +336,13 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='turtlesim',
-            namespace='turtlesim1',
             executable='turtlesim_node',
-            name='sim'
         ),
         Node(
-            package='turtlesim',
-            namespace='turtlesim2',
-            executable='turtlesim_node',
-            name='sim'
-        ),
-        Node(
-            package='turtlesim',
-            executable='mimic',
-            name='mimic',
-            remappings=[
-                ('/input/pose', '/turtlesim1/turtle1/pose'),
-                ('/output/cmd_vel', '/turtlesim2/turtle1/cmd_vel'),
-            ]
+            package='my_node',
+            executable='turtle_controller',
         )
     ])
-
 ```
 * Add below line to setup.py header
 ```
