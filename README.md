@@ -1313,3 +1313,20 @@ Multi-Window Terminator
 ```
 sudo apt install terminator
 ```
+### MacBook Apple Silicon XQuartz Setup
+XQuartz Setting
+- Launch XQuartz from your Applications > Utilities folder.
+- Open XQuartz Preferences (click XQuartz in the top menu bar, then Settings... or Preferences...).
+- Go to the Security tab.
+- Check the box for "Allow connections from network clients".
+- Restart XQuartz (quit and reopen) for the changes to take effect.
+
+XTerm in XQuartz
+```
+xhost +localhost
+```
+
+Docker run command
+```
+docker run --name ros-humble-training -e DISPLAY=host.docker.internal:0 -it twming/ros-humble-training
+```
