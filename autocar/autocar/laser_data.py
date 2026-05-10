@@ -3,15 +3,23 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
+from rclpy.qos import QoSDurabilityPolicy, QoSHistoryPolicy, QoSReliabilityPolicy
+from rclpy.qos import QoSProfile
 
 class LaserDataNode(Node):
     def __init__(self):
         super().__init__('laser_data_node')
+        
+        qos_profile = QoSProfile(depth=10)
+        qos_profile.reliability = QoSReliabilityPolicy.BEST_EFFORT
+        qos_profile.durability = QoSDurabilityPolicy.VOLATILE
+        
         self.subscription = self.create_subscription(
             LaserScan,
             'scan',
             self.laser_callback,
-            10
+            qos_profile,
+            #10
         )
         self.subscription  # prevent unused variable warning
 
