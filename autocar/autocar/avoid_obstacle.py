@@ -4,11 +4,18 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
+from rclpy.qos import QoSDurabilityPolicy, QoSHistoryPolicy, QoSReliabilityPolicy
+from rclpy.qos import QoSProfile
 
 class ObstacleAvoidanceNode(Node):
     def __init__(self):
         super().__init__('obstacle_avoidance_node')
-        self.publisher = self.create_publisher(Twist, '/cmd_vel', 10)
+        
+        qos_profile = QoSProfile(depth=10)
+        qos_profile.reliability = QoSReliabilityPolicy.BEST_EFFORT
+        qos_profile.durability = QoSDurabilityPolicy.VOLATILE
+        
+        self.publisher = self.create_publisher(Twist, '/cmd_vel', qos_profile,)
         self.subscription = self.create_subscription(
             LaserScan, '/scan', self.scan_callback, 10)
         self.move = Twist()
