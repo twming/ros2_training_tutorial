@@ -362,7 +362,7 @@ from glob import glob
 cd ~/dev_ws/src/
 ros2 pkg create my_interface --build-type ament_cmake
 ```
-* Add below line to package.xml after <license> and before <test_depend>
+* Add below line to package.xml after license and before test_depend
 ```
 <buildtool_depend>rosidl_default_generators</buildtool_depend>
 <exec_depend>rosidl_default_runtime</exec_depend>
@@ -372,7 +372,7 @@ ros2 pkg create my_interface --build-type ament_cmake
 ```
 find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/TargetCoordinates.msg"
+  #"msg/TargetCoordinates.msg"
   #"srv/AddTwoInts.srv"
   #"action/Fibonacci.action"
 )
@@ -386,7 +386,7 @@ string id
 int32 x
 int32 y
 ```
-* Update CMakeList.txt.
+* Update CMakeList.txt by removing the "#" at "msg/TargetCoordinates.msg"
 * Build the “my_interface” package.
 * Check the interface message using ros2 command.
 
