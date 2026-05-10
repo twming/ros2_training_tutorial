@@ -68,7 +68,7 @@ cd ~/dev_ws/src
 ```
 * Create "my_node" python package
 ```
-ros2 pkg create my_node  --build-type ament_python
+ros2 pkg create my_node --build-type ament_python
 ```
 
 ### Activity 2.2: Colcon build
@@ -351,7 +351,7 @@ from glob import glob
 ```
 * Add below line to setup.py data_files array
 ```
-(os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.py')))
+(os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.py'))),
 ```
 * Colcon build, source setup.bash.
 * Run together with tele_op to observe movement in turtlesim
@@ -362,7 +362,7 @@ from glob import glob
 cd ~/dev_ws/src/
 ros2 pkg create my_interface --build-type ament_cmake
 ```
-* Add below line to package.xml
+* Add below line to package.xml after <license> and before <test_depend>
 ```
 <buildtool_depend>rosidl_default_generators</buildtool_depend>
 <exec_depend>rosidl_default_runtime</exec_depend>
