@@ -456,7 +456,7 @@ int32 y
 ---
 int32 sum
 ```
-* Update CMakeList.txt.
+* Update CMakeList.txt by removing the "#" at "srv/AddTwoInts.srv"
 * Build the “my_interface” package.
 * Check the interface message using ros2 command.
 
@@ -552,7 +552,7 @@ int32[] sequence
 ---
 int32[] partial_sequence
 ```
-* Update CMakeList.txt.
+* Update CMakeList.txt by removing the "#" at "action/Fibonacci.action"
 * Build the “my_interface” package.
 * Check the interface message using ros2 command.
 
