@@ -15,9 +15,9 @@ class ExploringNode(Node):
         qos_profile.reliability = QoSReliabilityPolicy.BEST_EFFORT
         qos_profile.durability = QoSDurabilityPolicy.VOLATILE
         
-        self.publisher_ = self.create_publisher(Twist, 'cmd_vel', qos_profile,)
+        self.publisher_ = self.create_publisher(Twist, 'cmd_vel', 10)
         self.subscription = self.create_subscription(
-            LaserScan, 'scan', self.scan_callback, 10)
+            LaserScan, 'scan', self.scan_callback, qos_profile,)
         self.front_dist = 0.0
         self.left_dist = 0.0
         self.right_dist = 0.0
