@@ -843,6 +843,11 @@ ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 ```
 ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True autostart:=True map:=$HOME/map.yaml
 ```
+> [!TIP: ROS Jazzy]
+> turtlebot3_navigation2 for ROS Jazzy
+```
+ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=$HOME/map.yaml
+```
 * Terminal 3: Load RViz2, initialize pose and navigate
 ```
 ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz 
