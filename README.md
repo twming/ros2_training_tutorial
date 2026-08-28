@@ -843,7 +843,7 @@ ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 ```
 ros2 launch nav2_bringup bringup_launch.py use_sim_time:=True autostart:=True map:=$HOME/map.yaml
 ```
-> [!TIP:]
+> [!TIP]
 > turtlebot3_navigation2 for ROS Jazzy
 ```
 ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=$HOME/map.yaml
