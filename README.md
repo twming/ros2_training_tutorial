@@ -28,14 +28,7 @@ This are the activities and instructions to start.
   - [Activity 3.2: LiDAR Scan Data in RViz](#activity-32-lidar-scan-data-in-rviz)
   - [Activity 3.3: Exploring the world using LiDAR and SLAM](#activity-33-exploring-the-world-using-lidar-and-slam)
   - [Activity 3.4: Navigate using SLAM map](#activity-34-navigate-using-slam-map)
-  - [Activity 3.5: Turtlebot3 Control with Python](#activity-35-turtlebot3-control-with-python)
-    - [Activity 3.5.1: Initialize Pose](#activity-351-initialize-pose)
-    - [Activity 3.5.2: Move Turtlebot](#activity-352-move-turtlebot)
-    - [Activity 3.5.3: LiDAR data](#activity-353-lidar-data)
-    - [Activity 3.5.4: Avoid Obstacle](#activity-354-avoid-obstacle)
-    - [Activity 3.5.5: Path Planning](#activity-355-path-planning)
-    - [Activity 3.5.6: Autonomous Exploring](#activity-356-autonomous-exploring)
-- [Reference](#reference)
+
 
 # ROS Client Library Python Programming
 
