@@ -1,5 +1,5 @@
 # ROS2 Container Installation in Docker Desktop
-Go to Window PowerShell, enter below command. The installation will check your local repository, then go to twming/ros-humble-training Docker Hub to download, if not available. The installation may take 20 mins.
+Go to Window Command Line/PowerShell, enter below command. The installation will check your local repository, then go to twming/ros-humble-training Docker Hub to download, if not available. The installation may take 20 mins.
 ```
 docker run --name ros-humble-training -p 8080:8080 -v ros_data:/root twming/ros-humble-training:web
 ```
@@ -56,15 +56,6 @@ colcon build
 ### Activity 2.3: Topic Publisher
 * Create “publisher.py” in my_node/my_node folder
 * Define “MinimalPublisher” class and String “topic“
-* Update new entry line in setup.py
-```
-"publisher=my_node.publisher:main",
-```
-* Colcon build, source setup.bash and run
-* Use ros2 topic echo /topic to check the message.
-```
-ros2 run my_node publisher
-```
 > [!TIP]
 > publisher.py
 ```
@@ -97,6 +88,21 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+```
+* Update new entry line in setup.py
+```
+"publisher=my_node.publisher:main",
+```
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Run the publisher node
+* Use ros2 topic echo /topic to check the message.
+```
+ros2 run my_node publisher
 ```
 
 ### Activity 2.4: Topic Subscriber
