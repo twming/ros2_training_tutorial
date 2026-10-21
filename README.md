@@ -22,7 +22,7 @@ This are the activities and instructions to start.
   - [Activity 2.5: draw_circle.py](#activity-25-draw_circlepy)
   - [Activity 2.6: pose_subscriber.py](#activity-26-pose_subscriberpy)
   - [Activity 2.7: turtle_controller.py](#activity-27-turtle_controllerpy)
-  - [Activity 2.8: turtle_controller_with_pen.py](#activity-216-turtle_controller_with_penpy)
+  - [Activity 2.8: turtle_controller_with_pen.py](#activity-28-turtle_controller_with_penpy)
 - [LiDAR, SLAM and Navigation](#lidar-slam-and-navigation)
   - [Activity 3.1: Controlling Turtlebot3 Burger using Teleop Keyboard](#activity-31-controlling-turtlebot3-burger-using-teleop-keyboard)
   - [Activity 3.2: LiDAR Scan Data in RViz](#activity-32-lidar-scan-data-in-rviz)
