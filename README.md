@@ -155,7 +155,7 @@ ros2 run my_node subscriber
 ```
 
 ### Activity 2.5: draw_circle.py
-* Create “draw_circle.py” in my_node
+* Create “draw_circle.py” in my_node/my_node folder
 * Complete the code.
 > [!TIP]
 > Node and Topic Information
@@ -212,7 +212,7 @@ ros2 run my_node draw_circle
 ```
 
 ### Activity 2.6: pose_subscriber.py
-* Create a new python file “pose_subscriber.py”
+* Create a new python file “pose_subscriber.py” in my_node/my_node folder
 * Complete the code.
 > [!TIP]
 > Node and Topic Information
@@ -267,7 +267,7 @@ ros2 run my_node pose_subscriber
 ```
 
 ### Activity 2.7: turtle_controller.py
-* Create a new python file “turtle_controller.py”
+* Create a new python file “turtle_controller.py” in my_node/my_node folder
 * Complete the code.
 > [!TIP]
 > Node and Topic Information
@@ -331,7 +331,7 @@ ros2 run my_node turtle_controller
 ```
 
 ### Activity 2.8: turtle_controller_with_pen.py
-* Create a new python file “turtle_controller_with_pen.py”
+* Create a new python file “turtle_controller_with_pen.py” in my_node/my_node folder
 * Complete the code.
 > [!TIP]
 > Node and Topic Information
