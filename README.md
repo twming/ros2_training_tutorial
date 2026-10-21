@@ -1,11 +1,7 @@
 # ROS2 Container Installation in Docker Desktop
-Go to Window PowerShell, enter below command. The installation will check your local repository, then go to twming/ros-humble-training Docker Hub to download, if not available. The installation may take 20 mins.
+Go to Window Command Line/PowerShell, enter below command. The installation will check your local repository, then go to twming/ros-humble-training Docker Hub to download, if not available. The installation may take 20 mins.
 ```
-docker run --name "ros-humble-training" -it twming/ros-humble-training
-```
-To exit the container.
-```
-exit
+docker run --name ros-humble-training -p 8080:8080 -v ros_data:/root twming/ros-humble-training:web
 ```
 To stop the container.
 ```
@@ -14,14 +10,6 @@ docker stop ros-humble-training
 To start the container.
 ```
 docker start ros-humble-training
-```
-To login the container.
-```
-docker exec -it ros-humble-training /bin/bash
-```
-To setup the ROS environment in docker
-```
-source bashrc
 ```
 
 # ROS2 Training Tutorials v2.0
@@ -85,15 +73,6 @@ colcon build
 ### Activity 2.3: Topic Publisher
 * Create “publisher.py” in my_node/my_node folder
 * Define “MinimalPublisher” class and String “topic“
-* Update new entry line in setup.py
-```
-"publisher=my_node.publisher:main",
-```
-* Colcon build, source setup.bash and run
-* Use ros2 topic echo /topic to check the message.
-```
-ros2 run my_node publisher
-```
 > [!TIP]
 > publisher.py
 ```
@@ -127,19 +106,25 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"publisher=my_node.publisher:main",
+```
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Run the publisher node
+* Use ros2 topic echo /topic to check the message.
+```
+ros2 run my_node publisher
+```
 
 ### Activity 2.4: Topic Subscriber
 * Create “subscriber.py” in my_node/my_node folder
 * Define “MinimalSubscriber” class and String “topic“
-* Update new entry line in setup.py
-```
-"subscriber=my_node.subscriber:main",
-```
-* Colcon build, source setup.bash and run
-```
-ros2 run my_node subscriber
-```
-* Run and test the output together with publisher
 > [!TIP]
 > subscriber.py
 ```
@@ -171,16 +156,24 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-
-### Activity 2.5: draw_circle.py
-* Create “draw_circle.py” in my_node
-* Complete the code.
 * Update new entry line in setup.py
 ```
-"draw_circle=my_node.draw_circle:main",
+"subscriber=my_node.subscriber:main",
 ```
-* Colcon build, source setup.bash and run
-* Run and observe movement in turtlesim
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Run the subscriber node and test the output together with publisher node
+```
+ros2 run my_node subscriber
+```
+
+### Activity 2.5: draw_circle.py
+* Create “draw_circle.py” in my_node/my_node folder
+* Complete the code.
 > [!TIP]
 > Node and Topic Information
 ```
@@ -220,16 +213,24 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-
-### Activity 2.6: pose_subscriber.py
-* Create a new python file “pose_subscriber.py”
-* Complete the code.
 * Update new entry line in setup.py
 ```
-"pose_subscriber=my_node.pose_subscriber:main",
+"draw_circle=my_node.draw_circle:main",
 ```
-* Colcon build, source setup.bash.
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
 * Run and observe movement in turtlesim
+```
+ros2 run my_node draw_circle
+```
+
+### Activity 2.6: pose_subscriber.py
+* Create a new python file “pose_subscriber.py” in my_node/my_node folder
+* Complete the code.
 > [!TIP]
 > Node and Topic Information
 ```
@@ -267,24 +268,32 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-
-### Activity 2.7: turtle_controller.py
-* Create a new python file “turtle_controller.py”
-* Complete the code.
 * Update new entry line in setup.py
 ```
-"turtle_controller=my_node.turtle_controller:main",
+"pose_subscriber=my_node.pose_subscriber:main",
 ```
-* Colcon build, source setup.bash.
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
 * Run and observe movement in turtlesim
+```
+ros2 run my_node pose_subscriber
+```
+
+### Activity 2.7: turtle_controller.py
+* Create a new python file “turtle_controller.py” in my_node/my_node folder
+* Complete the code.
 > [!TIP]
 > Node and Topic Information
 ```
 node name: "TurtleControllerNode"
 publisher topic: "/turtle1/cmd_vel"
 subscriber topic: "/turtle1/pose"
-foward: linear.x=5.0, angular.z=0.0
 turn: linear.x=1.0, angular.z=0.9
+foward: linear.x=5.0, angular.z=0.0
 ```
 > [!TIP]
 > turtle_controller.py
@@ -323,6 +332,20 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"turtle_controller=my_node.turtle_controller:main",
+```
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Run and observe movement in turtlesim
+```
+ros2 run my_node turtle_controller
+```
 
 ### Activity 2.8: Create Launch File
 * Create a folder “launch” in “my_node”
@@ -353,8 +376,16 @@ from glob import glob
 ```
 (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.py'))),
 ```
-* Colcon build, source setup.bash.
-* Run together with tele_op to observe movement in turtlesim
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Launch together with tele_op to observe movement in turtlesim
+```
+ros2 launch my_node turtlesim_controller_launch.py
+```
 
 ### Activity 2.9: Create Interface Package
 * Create “my_interface” package using ROS command:
