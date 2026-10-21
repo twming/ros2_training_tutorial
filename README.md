@@ -699,12 +699,6 @@ if __name__ == '__main__':
 ### Activity 2.16: turtle_controller_with_pen.py
 * Create a new python file “turtle_controller_with_pen.py”
 * Complete the code.
-* Update new entry line in setup.py
-```
-"turtle_controller_with_pen=my_node.turtle_controller_with_pen:main",
-```
-* Colcon build, source setup.bash.
-* Run and observe movement in turtlesim
 > [!TIP]
 > Node and Topic Information
 ```
@@ -785,6 +779,21 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"turtle_controller_with_pen=my_node.turtle_controller_with_pen:main",
+```
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Run and observe movement in turtlesim
+```
+ros2 run my_node turtle_controller_with_pen
+```
+
 ### Bonus: TurtleStatus Custom Topic
 * Create "TurtleStatus" topic interface with below fields:
 ```
