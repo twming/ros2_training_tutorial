@@ -108,15 +108,6 @@ ros2 run my_node publisher
 ### Activity 2.4: Topic Subscriber
 * Create “subscriber.py” in my_node/my_node folder
 * Define “MinimalSubscriber” class and String “topic“
-* Update new entry line in setup.py
-```
-"subscriber=my_node.subscriber:main",
-```
-* Colcon build, source setup.bash and run
-```
-ros2 run my_node subscriber
-```
-* Run and test the output together with publisher
 > [!TIP]
 > subscriber.py
 ```
@@ -148,16 +139,24 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"subscriber=my_node.subscriber:main",
+```
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Run the subscriber node and test the output together with publisher node
+```
+ros2 run my_node subscriber
+```
 
 ### Activity 2.5: draw_circle.py
 * Create “draw_circle.py” in my_node
 * Complete the code.
-* Update new entry line in setup.py
-```
-"draw_circle=my_node.draw_circle:main",
-```
-* Colcon build, source setup.bash and run
-* Run and observe movement in turtlesim
 > [!TIP]
 > Node and Topic Information
 ```
@@ -197,16 +196,24 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"draw_circle=my_node.draw_circle:main",
+```
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Run and observe movement in turtlesim
+```
+ros2 run my_node draw_circle
+```
 
 ### Activity 2.6: pose_subscriber.py
 * Create a new python file “pose_subscriber.py”
 * Complete the code.
-* Update new entry line in setup.py
-```
-"pose_subscriber=my_node.pose_subscriber:main",
-```
-* Colcon build, source setup.bash.
-* Run and observe movement in turtlesim
 > [!TIP]
 > Node and Topic Information
 ```
@@ -244,24 +251,32 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+* Update new entry line in setup.py
+```
+"pose_subscriber=my_node.pose_subscriber:main",
+```
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Run and observe movement in turtlesim
+```
+ros2 run my_node pose_subscriber
+```
 
 ### Activity 2.7: turtle_controller.py
 * Create a new python file “turtle_controller.py”
 * Complete the code.
-* Update new entry line in setup.py
-```
-"turtle_controller=my_node.turtle_controller:main",
-```
-* Colcon build, source setup.bash.
-* Run and observe movement in turtlesim
 > [!TIP]
 > Node and Topic Information
 ```
 node name: "TurtleControllerNode"
 publisher topic: "/turtle1/cmd_vel"
 subscriber topic: "/turtle1/pose"
-foward: linear.x=5.0, angular.z=0.0
 turn: linear.x=1.0, angular.z=0.9
+foward: linear.x=5.0, angular.z=0.0
 ```
 > [!TIP]
 > turtle_controller.py
@@ -300,26 +315,33 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
-
+* Update new entry line in setup.py
+```
+"turtle_controller=my_node.turtle_controller:main",
+```
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Run and observe movement in turtlesim
+```
+ros2 run my_node turtle_controller
+```
 
 ### Activity 2.8: turtle_controller_with_pen.py
 * Create a new python file “turtle_controller_with_pen.py”
 * Complete the code.
-* Update new entry line in setup.py
-```
-"turtle_controller_with_pen=my_node.turtle_controller_with_pen:main",
-```
-* Colcon build, source setup.bash.
-* Run and observe movement in turtlesim
 > [!TIP]
 > Node and Topic Information
 ```
 node name: "TurtleControllerWithPenNode"
 publisher topic: "/turtle1/cmd_vel"
 subscriber topic: "/turtle1/pose"
-set_pen service: "/turtle1/set_pen"
 Red: 255,0,0,3,0
 Green: 0,255,0,3,0
+set_pen service: "/turtle1/set_pen"
 ```
 > [!TIP]
 > turtle_controller_with_pen.py
@@ -390,6 +412,20 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+```
+* Update new entry line in setup.py
+```
+"turtle_controller_with_pen=my_node.turtle_controller_with_pen:main",
+```
+* Colcon build and source setup.bash
+```
+cd ~/dev_ws
+colcon build
+source ~/dev_ws/install/setup.bash
+```
+* Run and observe movement in turtlesim
+```
+ros2 run my_node turtle_controller_with_pen
 ```
 
 # LiDAR, SLAM and Navigation
